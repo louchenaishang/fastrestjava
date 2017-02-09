@@ -29,12 +29,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
-        if (logger.isDebugEnabled()) {
-            logger.info("url:{}", request.getRequestURL());
-            logger.info("handler:{}", handler);
-        }
-
-        if(request.getMethod().equals(RequestMethod.OPTIONS.toString())){
+        if(request.getMethod().toUpperCase().equals(RequestMethod.OPTIONS.toString())){
             return true;
         }
 

@@ -2,6 +2,7 @@ package person.louchen.restj.server.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import person.louchen.restj.security.SecurityConstant;
 import person.louchen.restj.security.SecurityHolder;
@@ -24,6 +25,9 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
+        if(request.getMethod().toUpperCase().equals(RequestMethod.OPTIONS.toString())){
+            return true;
+        }
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(SecurityConstant.SESSION_TIMEOUT);
         Object attribute = session.getAttribute(SecurityConstant.SESSION_STORAGE_KEY);
