@@ -26,8 +26,14 @@ public class UserEntity extends BaseDateDomain {
     @Column(name = "name", nullable = false)
     private String name;//昵称
 
+    @Column(name = "avatar", length = 1000)
+    private String avatar;//头像
+
     @Column(name = "phone")
     private String phone;//手机号
+
+    @Column(name = "email")
+    private String email;//邮箱
 
     @Column(name = "isdel")
     private boolean isdel;//封号

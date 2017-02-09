@@ -3,6 +3,7 @@ package person.louchen.restj.server.interceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import person.louchen.restj.interfaces.security.AuthService;
@@ -31,6 +32,10 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         if (logger.isDebugEnabled()) {
             logger.info("url:{}", request.getRequestURL());
             logger.info("handler:{}", handler);
+        }
+
+        if(request.getMethod().equals(RequestMethod.OPTIONS.toString())){
+            return true;
         }
 
         HandlerMethod handlerMethod = (HandlerMethod) handler;

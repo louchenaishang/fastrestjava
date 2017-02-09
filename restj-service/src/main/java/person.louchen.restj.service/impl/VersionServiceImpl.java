@@ -14,6 +14,7 @@ public class VersionServiceImpl implements VersionService {
     @Autowired
     private Parameter parameter;
 
+    @Override
     public String get() throws Exception {
         return parameter.getProjectVersion();
     }

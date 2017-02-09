@@ -17,4 +17,6 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
     @Query("select u from UserEntity u order by u.createdttm")
     List<UserEntity> getUsersByLimit(Pageable userPageable);
 
+    @Query("select u from UserEntity u where u.loginName=?1")
+    UserEntity findByLoginName(String loginName);
 }

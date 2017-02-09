@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class AuthServiceImpl extends AbstractBusinessServiceImpl implements AuthService {
 
+    @Override
     public boolean verify(final HttpServletRequest request,final HttpServletResponse response) throws Exception {
         final String userId = SecurityHolder.get();
         if(EmptyUtil.isNotEmpty(userId)){

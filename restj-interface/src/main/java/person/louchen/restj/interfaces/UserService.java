@@ -10,7 +10,18 @@ import java.util.List;
 public interface UserService {
 
     /**
+     * 用户登录
+     *
+     * @param loginName
+     * @param loginPwd
+     * @return
+     * @throws Exception
+     */
+    UserEntity login(String loginName, String loginPwd) throws Exception;
+
+    /**
      * 新建一个用户
+     *
      * @param userEntity
      * @return
      * @throws Exception
@@ -19,6 +30,7 @@ public interface UserService {
 
     /**
      * 获取所有用户
+     *
      * @return
      * @throws Exception
      */
