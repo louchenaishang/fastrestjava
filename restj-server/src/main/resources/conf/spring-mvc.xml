@@ -52,7 +52,9 @@
     </mvc:annotation-driven>
 
     <mvc:cors>
-        <mvc:mapping path="/**"/>
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="*"/>
     </mvc:cors>
 
     <mvc:interceptors>

@@ -1,12 +1,8 @@
 package person.louchen.restj.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.model.entity.UserEntity;
 import person.louchen.restj.result.ResultObject;
@@ -46,6 +42,23 @@ public class UserController {
     }
 
     /**
+     * 根据id得到一个用户
+     *
+     * @return
+     */
+    @RequestMapping(value = "/one", method = {RequestMethod.GET})
+    public ResultObject getOne(String id) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.getOne(id));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
+    }
+
+    /**
      * 新建用户
      *
      * @return
@@ -68,10 +81,10 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.DELETE})
-    public ResultObject deleteOne(@RequestBody UserEntity one) {
+    public ResultObject deleteOne(String id) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(userService.deleteOne(one.getId()));
+            resultObject.setBody(userService.deleteOne(id));
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());

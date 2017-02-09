@@ -22,6 +22,15 @@ public interface UserService {
     UserEntity login(String loginName, String loginPwd) throws Exception;
 
     /**
+     * 根据id得到一个用户
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    UserEntity getOne(String id) throws Exception;
+
+    /**
      * 新建一个用户
      *
      * @param userEntity
