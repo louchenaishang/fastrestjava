@@ -1,6 +1,8 @@
 package person.louchen.restj.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +11,8 @@ import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.model.entity.UserEntity;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
+
+import java.util.List;
 
 /**
  * Created by louchen on 2017/2/8.
@@ -26,10 +30,14 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "", method = {RequestMethod.GET})
-    public ResultObject getUserList(String name) {
+    public ResultObject getUserList(String name, Integer page, Integer size) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(userService.getAll(name));
+            if (page != null && size != null) {
+                resultObject.setBody(userService.getAll(name, new PageRequest(page, size)));
+            } else {
+                resultObject.setBody(userService.getAll(name));
+            }
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());
@@ -53,7 +61,6 @@ public class UserController {
         }
         return resultObject;
     }
-
 
 
 }

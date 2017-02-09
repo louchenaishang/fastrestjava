@@ -1,5 +1,7 @@
 package person.louchen.restj.service.impl;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -48,6 +50,15 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
             return userRepository.findAll();
         }else{
             return userRepository.findByNameLike(name);
+        }
+    }
+
+    @Override
+    public Page<UserEntity> getAll(String name, Pageable pageable) throws Exception {
+        if(EmptyUtil.isEmpty(name)){
+            return userRepository.findAll(pageable);
+        }else{
+            return userRepository.findByNameLike(name,pageable);
         }
     }
 

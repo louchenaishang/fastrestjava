@@ -1,5 +1,7 @@
 package person.louchen.restj.interfaces;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import person.louchen.restj.model.entity.UserEntity;
 
 import java.util.List;
@@ -35,5 +37,13 @@ public interface UserService {
      * @throws Exception
      */
     List<UserEntity> getAll(String name) throws Exception;
+
+    /**
+     * 获取所有用户
+     *
+     * @return
+     * @throws Exception
+     */
+    Page<UserEntity> getAll(String name, Pageable pageable) throws Exception;
 
 }
