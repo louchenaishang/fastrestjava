@@ -45,6 +45,13 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
     }
 
     @Override
+    public boolean deleteOne(String id) throws Exception {
+        UserEntity userEntity = userRepository.findOne(id);
+        userRepository.delete(userEntity);
+        return true;
+    }
+
+    @Override
     public List<UserEntity> getAll(String name) throws Exception {
         if(EmptyUtil.isEmpty(name)){
             return userRepository.findAll();

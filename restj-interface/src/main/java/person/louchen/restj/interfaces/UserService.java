@@ -31,6 +31,15 @@ public interface UserService {
     UserEntity newOne(UserEntity userEntity) throws Exception;
 
     /**
+     * 删除一个用户
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    boolean deleteOne(String id) throws Exception;
+
+    /**
      * 获取所有用户
      *
      * @return

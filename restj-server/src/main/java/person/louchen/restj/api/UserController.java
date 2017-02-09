@@ -62,5 +62,22 @@ public class UserController {
         return resultObject;
     }
 
+    /**
+     * 删除用户
+     *
+     * @return
+     */
+    @RequestMapping(value = "/one", method = {RequestMethod.DELETE})
+    public ResultObject deleteOne(@RequestBody UserEntity one) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.deleteOne(one.getId()));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
+    }
+
 
 }
