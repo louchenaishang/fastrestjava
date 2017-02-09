@@ -9,8 +9,19 @@ import java.util.List;
  */
 public interface UserService {
 
+    /**
+     * 新建一个用户
+     * @param userEntity
+     * @return
+     * @throws Exception
+     */
     UserEntity newOne(UserEntity userEntity) throws Exception;
 
+    /**
+     * 获取所有用户
+     * @return
+     * @throws Exception
+     */
     List<UserEntity> getAll() throws Exception;
 
 }

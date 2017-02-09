@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import person.louchen.restj.interfaces.VersionService;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
+import person.louchen.restj.server.annotation.SkipAuth;
 
 /**
  * Created by louchen on 2017/2/8.
@@ -24,6 +25,7 @@ public class VersionController {
      * @return
      */
     @RequestMapping(value = "", method = {RequestMethod.GET})
+    @SkipAuth
     public ResultObject getUserList() {
         ResultObject resultObject = new ResultObject();
         try {

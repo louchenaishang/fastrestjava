@@ -5,6 +5,11 @@ package person.louchen.restj.interfaces;
  */
 public interface VersionService {
 
+    /**
+     * 获取版本号
+     * @return
+     * @throws Exception
+     */
     String get() throws Exception;
 
 }

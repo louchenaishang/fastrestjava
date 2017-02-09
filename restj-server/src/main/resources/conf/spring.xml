@@ -26,6 +26,7 @@
             <list>
                 <value>classpath:conf/config.properties</value>
                 <value>classpath:conf/jdbc.properties</value>
+                <value>classpath:conf/rest.properties</value>
                 <value>classpath:conf/version.properties</value>
             </list>
         </property>
