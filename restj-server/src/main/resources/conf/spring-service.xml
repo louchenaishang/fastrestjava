@@ -38,6 +38,7 @@
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <!-- 开启事务 -->
+            <tx:method name="new*" propagation="REQUIRED"/>
             <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="insert*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
@@ -50,8 +51,7 @@
             <tx:method name="clear*" propagation="REQUIRED"/>
             <tx:method name="confirm*" propagation="REQUIRED"/>
             <tx:method name="generate*" propagation="REQUIRED"/>
-            <tx:method name="import*" rollback-for="java.lang.Exception"
-                       propagation="REQUIRED"/>
+            <tx:method name="import*" rollback-for="java.lang.Exception" propagation="REQUIRED"/>
 
             <!-- 不开启事务 -->
             <tx:method name="get*" propagation="SUPPORTS"/>
