@@ -26,10 +26,10 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "", method = {RequestMethod.GET})
-    public ResultObject getUserList() {
+    public ResultObject getUserList(String name) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(userService.getAll());
+            resultObject.setBody(userService.getAll(name));
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());

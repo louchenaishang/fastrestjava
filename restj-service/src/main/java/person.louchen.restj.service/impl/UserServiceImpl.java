@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import person.louchen.restj.framework.utils.BCryptUtil;
+import person.louchen.restj.framework.utils.EmptyUtil;
 import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.model.entity.UserEntity;
 import person.louchen.restj.security.SecurityConstant;
@@ -42,8 +43,12 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
     }
 
     @Override
-    public List<UserEntity> getAll() throws Exception {
-        return userRepository.findAll();
+    public List<UserEntity> getAll(String name) throws Exception {
+        if(EmptyUtil.isEmpty(name)){
+            return userRepository.findAll();
+        }else{
+            return userRepository.findByNameLike(name);
+        }
     }
 
 }

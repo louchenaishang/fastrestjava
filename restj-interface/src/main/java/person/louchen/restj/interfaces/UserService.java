@@ -34,6 +34,6 @@ public interface UserService {
      * @return
      * @throws Exception
      */
-    List<UserEntity> getAll() throws Exception;
+    List<UserEntity> getAll(String name) throws Exception;
 
 }
