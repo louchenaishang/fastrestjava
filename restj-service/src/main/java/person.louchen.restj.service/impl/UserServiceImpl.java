@@ -51,6 +51,20 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
     }
 
     @Override
+    public UserEntity editOne(UserEntity userEntity) throws Exception {
+        UserEntity old = userRepository.findOne(userEntity.getId());
+
+        old.setName(userEntity.getName());
+        old.setSex(userEntity.getSex());
+        old.setAge(userEntity.getAge());
+        old.setBirth(userEntity.getBirth());
+        old.setAddr(userEntity.getAddr());
+        old.setPhone(userEntity.getPhone());
+
+        return userRepository.saveAndFlush(old);
+    }
+
+    @Override
     public boolean deleteOne(String id) throws Exception {
         UserEntity userEntity = userRepository.findOne(id);
         userRepository.delete(userEntity);

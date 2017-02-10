@@ -2,13 +2,14 @@ package person.louchen.restj.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.model.entity.UserEntity;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
-
-import java.util.List;
 
 /**
  * Created by louchen on 2017/2/8.
@@ -76,6 +77,23 @@ public class UserController {
     }
 
     /**
+     * 编辑用户
+     *
+     * @return
+     */
+    @RequestMapping(value = "/one", method = {RequestMethod.PUT})
+    public ResultObject editOne(@RequestBody UserEntity one) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.editOne(one));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
+    }
+
+    /**
      * 删除用户
      *
      * @return
@@ -91,6 +109,5 @@ public class UserController {
         }
         return resultObject;
     }
-
 
 }

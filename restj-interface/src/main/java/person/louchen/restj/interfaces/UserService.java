@@ -40,6 +40,15 @@ public interface UserService {
     UserEntity newOne(UserEntity userEntity) throws Exception;
 
     /**
+     * 编辑一个用户
+     *
+     * @param userEntity
+     * @return
+     * @throws Exception
+     */
+    UserEntity editOne(UserEntity userEntity) throws Exception;
+
+    /**
      * 删除一个用户
      *
      * @param id
