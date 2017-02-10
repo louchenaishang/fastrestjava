@@ -46,6 +46,12 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
 
     @Override
     public UserEntity newOne(UserEntity userEntity) throws Exception {
+        if(EmptyUtil.isEmpty(userEntity.getLoginName())){
+            userEntity.setLoginName(userEntity.getName());
+        }
+        if(EmptyUtil.isEmpty(userEntity.getLoginPwd())){
+            userEntity.setLoginPwd("123456");
+        }
         userEntity.setLoginPwd(BCryptUtil.hashpw(userEntity.getLoginPwd()));
         return userRepository.saveAndFlush(userEntity);
     }
