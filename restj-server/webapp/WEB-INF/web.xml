@@ -15,10 +15,6 @@
         <param-name>logbackConfigLocation</param-name>
         <param-value>classpath:conf/logback.xml</param-value>
     </context-param>
-    <context-param>
-        <param-name>webAppRootKey</param-name>
-        <param-value>community-op.boot</param-value>
-    </context-param>
 
     <!-- encoding -->
     <filter>
