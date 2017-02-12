@@ -35,7 +35,7 @@
         <!-- aspectj -->
         <aspectj.version>1.8.2</aspectj.version>
         <!-- spring版本号 -->
-        <spring.version>4.2.0.RELEASE</spring.version>
+        <spring.version>4.3.6.RELEASE</spring.version>
         <spring-orm.version>4.2.0.RELEASE</spring-orm.version>
         <spring-redis.version>1.6.0.RELEASE</spring-redis.version>
         <spring-messaging.version>4.1.6.RELEASE</spring-messaging.version>
@@ -399,5 +399,19 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <source>${version.jdk}</source>
+                    <target>${version.jdk}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

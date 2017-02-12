@@ -14,8 +14,20 @@
 	http://www.springframework.org/schema/context/spring-context.xsd
 	">
 
+    <bean id="securityEntity" class="person.louchen.restj.security.SecurityEntity">
+        <property name="appId" value="${rest.appid}"/>
+        <property name="appSecret" value="${rest.appSecret}"/>
+    </bean>
+    <bean id="securityEntityManager" class="person.louchen.restj.security.SecurityEntityManager">
+        <property name="map">
+            <map>
+                <entry key="${rest.appid}" value-ref="securityEntity"/>
+            </map>
+        </property>
+    </bean>
+
     <!-- 扫描service包 -->
-    <context:component-scan base-package="person.louchen.restj.service">
+    <context:component-scan base-package="person.louchen.restj.service.impl">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
     </context:component-scan>
 
@@ -26,6 +38,7 @@
     <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <!-- 开启事务 -->
+            <tx:method name="new*" propagation="REQUIRED"/>
             <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="insert*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
@@ -33,13 +46,13 @@
             <tx:method name="modify*" propagation="REQUIRED"/>
             <tx:method name="edit*" propagation="REQUIRED"/>
             <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
             <tx:method name="remove*" propagation="REQUIRED"/>
             <tx:method name="do*" propagation="REQUIRED"/>
             <tx:method name="clear*" propagation="REQUIRED"/>
             <tx:method name="confirm*" propagation="REQUIRED"/>
             <tx:method name="generate*" propagation="REQUIRED"/>
-            <tx:method name="import*" rollback-for="java.lang.Exception"
-                       propagation="REQUIRED"/>
+            <tx:method name="import*" rollback-for="java.lang.Exception" propagation="REQUIRED"/>
 
             <!-- 不开启事务 -->
             <tx:method name="get*" propagation="SUPPORTS"/>

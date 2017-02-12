@@ -19,6 +19,8 @@
 
     <context:component-scan base-package="person.louchen.restj.api"/>
 
+    <bean id="apiExceptionHandler" class="person.louchen.restj.server.handler.ApiExcerptionHandler"/>
+
     <bean id="byteArrayHttpMessageConverter"
           class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
 
@@ -50,9 +52,35 @@
     </mvc:annotation-driven>
 
     <mvc:cors>
-        <mvc:mapping path="/**" />
+        <mvc:mapping path="/**"
+                     allowed-origins="*"
+                     allowed-methods="*"/>
     </mvc:cors>
 
-    <bean id="apiExceptionHandler" class="person.louchen.restj.server.handler.ApiExcerptionHandler"/>
+    <mvc:interceptors>
+        <!-- 第一个拦截器 请求签名验证 -->
+        <!-- 约定1.不可有exclude -->
+        <!-- 约定2.必须覆盖所有路径 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="person.louchen.restj.server.interceptor.SignInterceptor"/>
+        </mvc:interceptor>
+        <!-- 第二个拦截器 把requestSession中的关键信息存入threadlocal -->
+        <!-- 约定1.不可有不拦截的路径 -->
+        <!-- 约定2.必须覆盖所有路径 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="person.louchen.restj.server.interceptor.SessionInterceptor"/>
+        </mvc:interceptor>
+        <!-- 第三个拦截器 请求身份验证 -->
+        <!-- 约定1.可有exclude -->
+        <!-- 约定2.必须覆盖所有路径 -->
+        <!-- 约定3.被拦截的方法如果带有@SkipAuth,会跳过验证 -->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <!--<mvc:exclude-mapping path="/example/**"/>-->
+            <bean class="person.louchen.restj.server.interceptor.AuthInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

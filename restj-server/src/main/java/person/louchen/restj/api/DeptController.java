@@ -6,23 +6,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import person.louchen.restj.interfaces.UserService;
-import person.louchen.restj.model.entity.UserEntity;
+import person.louchen.restj.interfaces.DeptService;
+import person.louchen.restj.model.entity.DeptEntity;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
 
 /**
- * Created by louchen on 2017/2/8.
+ * Created by louchen on 2017/2/12.
  */
 @RestController
-@RequestMapping(value = "/users")
-public class UserController {
+@RequestMapping(value = "/depts")
+public class DeptController {
 
     @Autowired
-    private UserService userService;
+    private DeptService deptService;
 
     /**
-     * 根据条件获取用户
+     * 根据条件获取部门
      *
      * @return
      */
@@ -31,9 +31,9 @@ public class UserController {
         ResultObject resultObject = new ResultObject();
         try {
             if (page != null && size != null) {
-                resultObject.setBody(userService.getAll(name, new PageRequest(page, size)));
+                resultObject.setBody(deptService.getAll(name, new PageRequest(page, size)));
             } else {
-                resultObject.setBody(userService.getAll(name));
+                resultObject.setBody(deptService.getAll(name));
             }
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
@@ -43,7 +43,7 @@ public class UserController {
     }
 
     /**
-     * 根据id得到一个用户
+     * 根据id得到一个部门
      *
      * @return
      */
@@ -51,7 +51,7 @@ public class UserController {
     public ResultObject getOne(String id) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(userService.getOne(id));
+            resultObject.setBody(deptService.getOne(id));
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());
@@ -60,15 +60,15 @@ public class UserController {
     }
 
     /**
-     * 新建用户
+     * 新建部门
      *
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.POST})
-    public ResultObject newOne(@RequestBody UserEntity one) {
+    public ResultObject newOne(@RequestBody DeptEntity one) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(userService.newOne(one));
+            resultObject.setBody(deptService.newOne(one));
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());
@@ -77,15 +77,15 @@ public class UserController {
     }
 
     /**
-     * 编辑用户
+     * 编辑部门
      *
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.PUT})
-    public ResultObject editOne(@RequestBody UserEntity one) {
+    public ResultObject editOne(@RequestBody DeptEntity one) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(userService.editOne(one));
+            resultObject.setBody(deptService.editOne(one));
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());
@@ -94,7 +94,7 @@ public class UserController {
     }
 
     /**
-     * 删除用户
+     * 删除部门
      *
      * @return
      */
@@ -102,7 +102,7 @@ public class UserController {
     public ResultObject deleteOne(String id) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(userService.deleteOne(id));
+            resultObject.setBody(deptService.deleteOne(id));
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());

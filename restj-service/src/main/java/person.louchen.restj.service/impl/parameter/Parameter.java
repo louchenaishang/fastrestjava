@@ -1,4 +1,4 @@
-package person.louchen.restj.service.parameter;
+package person.louchen.restj.service.impl.parameter;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,42 +1,48 @@
 package person.louchen.restj.api;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import person.louchen.restj.interfaces.VersionService;
+import person.louchen.restj.interfaces.UserService;
+import person.louchen.restj.param.LoginParam;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
 import person.louchen.restj.server.annotation.SkipAuth;
 
 /**
- * Created by louchen on 2017/2/8.
+ * Created by louchen on 2017/2/9.
  */
 @RestController
-@RequestMapping(value = "/version")
-public class VersionController {
+@RequestMapping(value = "/login")
+public class LoginController {
 
     @Autowired
-    private VersionService versionService;
+    private UserService userService;
 
     /**
-     * 根据条件获取用户
+     * 用户登录
      *
+     * @param loginParam
      * @return
      */
-    @RequestMapping(value = "", method = {RequestMethod.GET})
+    @RequestMapping(value = "", method = {RequestMethod.POST})
     @SkipAuth
-    public ResultObject getUserList() {
+    public ResultObject login(@RequestBody LoginParam loginParam) {
         ResultObject resultObject = new ResultObject();
         try {
-            resultObject.setBody(versionService.get());
+            resultObject.setBody(userService.login(loginParam.getUsername(), loginParam.getPassword()));
         } catch (Exception e) {
             resultObject.setStatus(ResultStatus.ERROR);
             resultObject.setBody(e.getMessage());
         }
         return resultObject;
     }
-
-
 
 }

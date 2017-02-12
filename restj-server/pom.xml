@@ -38,6 +38,35 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>product</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.8</version>
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <configuration>
+                                    <target>
+                                        <copy todir="${basedir}/target/classes/conf" overwrite="true">
+                                            <fileset dir="${basedir}/distribute/product/"/>
+                                        </copy>
+                                    </target>
+                                </configuration>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <!-- 让配置文件可读取maven的变量,如${project.version} -->
         <resources>

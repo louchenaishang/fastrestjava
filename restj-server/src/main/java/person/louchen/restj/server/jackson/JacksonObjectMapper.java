@@ -46,7 +46,7 @@ public class JacksonObjectMapper extends ObjectMapper {
 
     public void init() {
         // 排除值为空属性
-        setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        //setSerializationInclusion(JsonInclude.Include.NON_NULL);
         // 按字母顺序排序
         configure(MapperFeature.SORT_PROPERTIES_ALPHABETICALLY,true);
         // 反序列化时忽略在JSON字符串中存在但Java对象实际没有的属性
