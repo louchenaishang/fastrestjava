@@ -40,7 +40,7 @@
     <import resource="classpath:conf/spring-persistence.xml" />
 
     <!-- redis -->
-    <import resource="classpath:conf/spring-redis.xml" />
+    <bean class="person.louchen.restj.config.RedisAppConfig"/>
 
     <!-- service -->
     <import resource="classpath:conf/spring-service.xml" />

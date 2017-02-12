@@ -82,7 +82,7 @@
     </bean>
 
     <!-- jpa dao路径 -->
-    <jpa:repositories base-package="person.louchen.restj.model.repository"
+    <jpa:repositories base-package="person.louchen.restj.model.repository.mysql"
                       transaction-manager-ref="transactionManager"
                       entity-manager-factory-ref="entityManagerFactory"/>
 

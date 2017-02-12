@@ -18,46 +18,46 @@ public class DeptServiceImpl extends AbstractBusinessServiceImpl implements Dept
 
     @Override
     public DeptEntity getOne(String id) throws Exception {
-        DeptEntity deptEntity = deptRepository.findOne(id);
+        DeptEntity deptEntity = deptMysqlRepository.findOne(id);
         return deptEntity;
     }
 
     @Override
     public DeptEntity newOne(DeptEntity deptEntity) throws Exception {
-        return deptRepository.saveAndFlush(deptEntity);
+        return deptMysqlRepository.saveAndFlush(deptEntity);
     }
 
     @Override
     public DeptEntity editOne(DeptEntity deptEntity) throws Exception {
-        DeptEntity old = deptRepository.findOne(deptEntity.getId());
+        DeptEntity old = deptMysqlRepository.findOne(deptEntity.getId());
 
         old.setName(deptEntity.getName());
 
-        return deptRepository.saveAndFlush(old);
+        return deptMysqlRepository.saveAndFlush(old);
     }
 
     @Override
     public boolean deleteOne(String id) throws Exception {
-        DeptEntity deptEntity = deptRepository.findOne(id);
-        deptRepository.delete(deptEntity);
+        DeptEntity deptEntity = deptMysqlRepository.findOne(id);
+        deptMysqlRepository.delete(deptEntity);
         return true;
     }
 
     @Override
     public List<DeptEntity> getAll(String name) throws Exception {
         if(EmptyUtil.isEmpty(name)){
-            return deptRepository.findAll();
+            return deptMysqlRepository.findAll();
         }else{
-            return deptRepository.findByNameLike(name);
+            return deptMysqlRepository.findByNameLike(name);
         }
     }
 
     @Override
     public Page<DeptEntity> getAll(String name, Pageable pageable) throws Exception {
         if(EmptyUtil.isEmpty(name)){
-            return deptRepository.findAll(pageable);
+            return deptMysqlRepository.findAll(pageable);
         }else{
-            return deptRepository.findByNameLike(name,pageable);
+            return deptMysqlRepository.findByNameLike(name,pageable);
         }
     }
 }

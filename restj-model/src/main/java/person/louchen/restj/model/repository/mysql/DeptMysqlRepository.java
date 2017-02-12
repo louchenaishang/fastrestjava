@@ -1,4 +1,4 @@
-package person.louchen.restj.model.repository;
+package person.louchen.restj.model.repository.mysql;
 
 
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import java.util.List;
  * Created by louchen on 2017/2/8.
  */
 @Repository
-public interface DeptRepository extends JpaRepository<DeptEntity, String> {
+public interface DeptMysqlRepository extends JpaRepository<DeptEntity, String> {
 
     @Query("select u from DeptEntity u where u.name like CONCAT('%',:name,'%')  order by u.createdtime")
     List<DeptEntity> findByNameLike(@Param("name") String name);
