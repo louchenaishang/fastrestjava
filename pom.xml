@@ -20,11 +20,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.jdk>1.8</version.jdk>
         <!-- modules -->
-        <version.restj-framework>1.0.0-SNAPSHOT</version.restj-framework>
-        <version.restj-model>1.0.0-SNAPSHOT</version.restj-model>
-        <version.restj-interface>1.0.0-SNAPSHOT</version.restj-interface>
-        <version.restj-service>1.0.0-SNAPSHOT</version.restj-service>
-        <version.restj-server>1.0.0-SNAPSHOT</version.restj-server>
+        <version.restj-framework>1.0.0-RELEASE</version.restj-framework>
+        <version.restj-model>1.0.0-RELEASE</version.restj-model>
+        <version.restj-interface>1.0.0-RELEASE</version.restj-interface>
+        <version.restj-service>1.0.0-RELEASE</version.restj-service>
+        <version.restj-server>1.0.0-RELEASE</version.restj-server>
         <!-- junit -->
         <junit.version>4.12</junit.version>
         <!-- validation-api -->
