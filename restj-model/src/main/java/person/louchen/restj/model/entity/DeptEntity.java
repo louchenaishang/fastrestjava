@@ -15,13 +15,11 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "t_dept")
-@RedisHash("depts")
 @Getter
 @Setter
 public class DeptEntity extends BaseDateDomain {
 
     @Column(name = "name", nullable = false)
-    @Indexed
     private String name;//部门名称
 
 }

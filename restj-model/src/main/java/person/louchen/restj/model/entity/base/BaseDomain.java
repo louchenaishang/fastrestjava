@@ -2,6 +2,7 @@ package person.louchen.restj.model.entity.base;
 
 import com.fasterxml.jackson.annotation.JsonFilter;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.redis.core.index.Indexed;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ public abstract class BaseDomain implements Serializable {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     @Column(name = "id", unique = true, nullable = false)
+    @Indexed
     private String id;
 
     public void setId(String id) {
