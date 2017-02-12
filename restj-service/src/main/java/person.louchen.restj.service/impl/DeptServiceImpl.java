@@ -2,6 +2,7 @@ package person.louchen.restj.service.impl;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import person.louchen.restj.framework.utils.EmptyUtil;
 import person.louchen.restj.interfaces.DeptService;
 import person.louchen.restj.model.entity.DeptEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by louchen on 2017/2/12.
  */
+@Service
 public class DeptServiceImpl extends AbstractBusinessServiceImpl implements DeptService {
 
     @Override
