@@ -26,6 +26,7 @@
             <list>
                 <value>classpath:conf/config.properties</value>
                 <value>classpath:conf/jdbc.properties</value>
+                <value>classpath:conf/redis.properties</value>
                 <value>classpath:conf/rest.properties</value>
                 <value>classpath:conf/version.properties</value>
             </list>
@@ -37,6 +38,9 @@
 
     <!-- persistence -->
     <import resource="classpath:conf/spring-persistence.xml" />
+
+    <!-- redis -->
+    <import resource="classpath:conf/spring-redis.xml" />
 
     <!-- service -->
     <import resource="classpath:conf/spring-service.xml" />
