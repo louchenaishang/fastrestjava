@@ -7,7 +7,7 @@
     <groupId>person.louchen</groupId>
     <artifactId>restj</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0-RELEASE</version>
     <modules>
         <module>restj-framework</module>
         <module>restj-service</module>
