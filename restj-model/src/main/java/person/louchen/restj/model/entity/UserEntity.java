@@ -56,10 +56,4 @@ public class UserEntity extends BaseDateDomain {
     private String memo;//备注
 
 
-
-
-
-
-
-
 }

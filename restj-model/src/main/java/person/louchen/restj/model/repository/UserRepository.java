@@ -17,10 +17,10 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, String> {
 
-    @Query("select u from UserEntity u where u.name like CONCAT('%',:name,'%')  order by u.createdttm")
+    @Query("select u from UserEntity u where u.name like CONCAT('%',:name,'%')  order by u.createdtime")
     List<UserEntity> findByNameLike(@Param("name") String name);
 
-    @Query("select u from UserEntity u where u.name like CONCAT('%',:name,'%')  order by u.createdttm")
+    @Query("select u from UserEntity u where u.name like CONCAT('%',:name,'%')  order by u.createdtime")
     Page<UserEntity> findByNameLike(@Param("name") String name, Pageable pageable);
 
     @Query("select u from UserEntity u where u.loginName=?1")

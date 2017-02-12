@@ -1,41 +1,31 @@
 package person.louchen.restj.model.entity.base;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Access(AccessType.PROPERTY)
 @MappedSuperclass
+@Getter
+@Setter
 public abstract class BaseDateDomain extends BaseDomain {
 
-    @Column(name = "createdttm")
-    private Date createdttm;//创建时间
+    @Column(name = "createdtime")
+    private Date createdtime;//创建时间
 
-    @Column(name = "updatedttm")
-    private Date updatedttm;//更新时间
+    @Column(name = "updatedtime")
+    private Date updatedtime;//更新时间
 
     @PrePersist
     public void prePersist() {
-        createdttm = updatedttm = new Date();
+        createdtime = updatedtime = new Date();
     }
 
     @PreUpdate
     public void preUpdate(){
-        updatedttm = new Date();
+        updatedtime = new Date();
     }
 
-    public Date getCreatedttm() {
-        return createdttm;
-    }
-
-    public void setCreatedttm(Date createdttm) {
-        this.createdttm = createdttm;
-    }
-
-    public Date getUpdatedttm() {
-        return updatedttm;
-    }
-
-    public void setUpdatedttm(Date updatedttm) {
-        this.updatedttm = updatedttm;
-    }
 }

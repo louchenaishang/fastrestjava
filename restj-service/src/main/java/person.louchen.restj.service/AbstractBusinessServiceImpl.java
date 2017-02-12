@@ -3,6 +3,7 @@ package person.louchen.restj.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import person.louchen.restj.model.repository.DeptRepository;
 import person.louchen.restj.model.repository.UserRepository;
 
 /**
@@ -14,5 +15,8 @@ public abstract class AbstractBusinessServiceImpl{
 
     @Autowired
     protected UserRepository userRepository;
+
+    @Autowired
+    protected DeptRepository deptRepository;
 
 }
