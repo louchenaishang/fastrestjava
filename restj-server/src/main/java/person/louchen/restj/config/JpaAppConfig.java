@@ -114,6 +114,8 @@ public class JpaAppConfig {
         dataSource.setTestOnReturn(DB_TestOnReturn);
         dataSource.setFilters(DB_Filters);
 
+        dataSource.init();
+
         return dataSource;
     }
 
@@ -140,8 +142,11 @@ public class JpaAppConfig {
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() {
-        return new JpaTransactionManager();
+    public PlatformTransactionManager transactionManager() throws SQLException {
+        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
+        jpaTransactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
+
+        return jpaTransactionManager;
     }
 
 }

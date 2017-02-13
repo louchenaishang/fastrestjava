@@ -37,4 +37,7 @@
     <!-- service -->
     <bean class="person.louchen.restj.config.ServiceAppConfig"/>
 
+    <!-- mvc -->
+    <bean class="person.louchen.restj.config.MvcConfig"/>
+
 </beans>
