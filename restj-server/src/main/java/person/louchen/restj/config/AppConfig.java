@@ -1,13 +1,12 @@
 package person.louchen.restj.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 
 /**
  * Created by louchen on 2017/2/13.
  */
 @Configuration
+@EnableAspectJAutoProxy
 @PropertySource({"classpath:conf/config.properties",
         "classpath:conf/version.properties",
         "classpath:conf/jdbc.properties",
