@@ -11,7 +11,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.persistence.EntityManagerFactory;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -140,8 +139,8 @@ public class JpaAppConfig {
         return entityManagerFactoryBean;
     }
 
-    @Bean(name = "transactionManager")
-    public PlatformTransactionManager annotationDrivenTransactionManager() {
+    @Bean
+    public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager();
     }
 
