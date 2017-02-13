@@ -28,8 +28,9 @@
                                             classpath:conf/version.properties"/>
 
 
-    <!-- persistence -->
+    <!-- jpa -->
     <import resource="classpath:conf/spring-persistence.xml"/>
+    <!--<bean class="person.louchen.restj.config.JpaAppConfig"/>-->
 
     <!-- redis -->
     <bean class="person.louchen.restj.config.RedisAppConfig"/>
