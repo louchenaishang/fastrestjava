@@ -38,6 +38,6 @@
     <bean class="person.louchen.restj.config.ServiceAppConfig"/>
 
     <!-- mvc -->
-    <bean class="person.louchen.restj.config.MvcConfig"/>
+    <bean class="person.louchen.restj.config.WebConfig"/>
 
 </beans>
