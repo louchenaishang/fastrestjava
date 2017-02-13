@@ -10,12 +10,12 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
+import java.sql.SQLException;
 import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "person.louchen.restj.model.repository.mysql")
 public class JpaAppConfig {
 
@@ -30,6 +30,39 @@ public class JpaAppConfig {
 
     @Value("${jdbc.password}")
     private String DB_PASSWORD;
+
+    @Value("${jdbc.initialSize}")
+    private int DB_InitialSize;
+
+    @Value("${jdbc.maxActive}")
+    private int DB_MaxActive;
+
+    @Value("${jdbc.minIdle}")
+    private int DB_MinIdle;
+
+    @Value("${jdbc.maxWait}")
+    private long DB_MaxWait;
+
+    @Value("${jdbc.defaultAutoCommit}")
+    private boolean DB_DefaultAutoCommit;
+
+    @Value("${jdbc.timeBetweenEvictionRunsMillis}")
+    private long DB_TimeBetweenEvictionRunsMillis;
+
+    @Value("${jdbc.minEvictableIdleTimeMillis}")
+    private long DB_MinEvictableIdleTimeMillis;
+
+    @Value("${jdbc.testWhileIdle}")
+    private boolean DB_TestWhileIdle;
+
+    @Value("${jdbc.testOnBorrow}")
+    private boolean DB_TestOnBorrow;
+
+    @Value("${jdbc.testOnReturn}")
+    private boolean DB_TestOnReturn;
+
+    @Value("${jdbc.filters}")
+    private String DB_Filters;
 
     @Value("${hibernate.packagesToScan}")
     private String ENTITYMANAGER_PACKAGES_TO_SCAN;
@@ -62,18 +95,31 @@ public class JpaAppConfig {
     private String HIBERNATE_ISOLATION;
 
     @Bean
-    public DruidDataSource dataSource() {
+    public DruidDataSource dataSource() throws SQLException {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(DB_DRIVER);
         dataSource.setUrl(DB_URL);
         dataSource.setUsername(DB_USERNAME);
         dataSource.setPassword(DB_PASSWORD);
 
+        dataSource.setInitialSize(DB_InitialSize);
+        dataSource.setMaxActive(DB_MaxActive);
+        dataSource.setMinIdle(DB_MinIdle);
+        dataSource.setMaxWait(DB_MaxWait);
+        dataSource.setDefaultAutoCommit(DB_DefaultAutoCommit);
+        dataSource.setTimeBetweenEvictionRunsMillis(DB_TimeBetweenEvictionRunsMillis);
+        dataSource.setMinEvictableIdleTimeMillis(DB_MinEvictableIdleTimeMillis);
+        dataSource.setValidationQuery("SELECT 'x'");
+        dataSource.setTestWhileIdle(DB_TestWhileIdle);
+        dataSource.setTestOnBorrow(DB_TestOnBorrow);
+        dataSource.setTestOnReturn(DB_TestOnReturn);
+        dataSource.setFilters(DB_Filters);
+
         return dataSource;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws SQLException {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setPackagesToScan(ENTITYMANAGER_PACKAGES_TO_SCAN);
@@ -96,9 +142,7 @@ public class JpaAppConfig {
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager annotationDrivenTransactionManager() {
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
-
-        return jpaTransactionManager;
+        return new JpaTransactionManager();
     }
 
 }
