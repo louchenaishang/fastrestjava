@@ -9,9 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>restj-server</artifactId>
+    <artifactId>restj-rest</artifactId>
     <packaging>jar</packaging>
-    <version>${version.restj-server}</version>
+    <version>${version.restj-rest}</version>
 
     <dependencies>
         <!-- modules -->

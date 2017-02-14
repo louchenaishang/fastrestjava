@@ -1,6 +1,7 @@
 package person.louchen.restj.config;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,8 @@ import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -18,7 +21,10 @@ import person.louchen.restj.mvc.interceptor.SessionInterceptor;
 import person.louchen.restj.mvc.interceptor.SignInterceptor;
 import person.louchen.restj.mvc.jackson.JacksonObjectMapper;
 
+import javax.servlet.DispatcherType;
+import javax.servlet.Filter;
 import java.nio.charset.Charset;
+import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -103,6 +109,37 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         registry.addInterceptor(authInterceptor()).addPathPatterns("/**");
 
         super.addInterceptors(registry);
+    }
+
+    @Bean
+    public FilterRegistrationBean characterEncodingFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(characterEncodingFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("characterEncodingFilter");
+        return registration;
+    }
+
+    @Bean
+    public Filter characterEncodingFilter() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return characterEncodingFilter;
+    }
+
+    @Bean
+    public FilterRegistrationBean openEntityManagerInViewFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(openEntityManagerInViewFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("openEntityManagerInViewFilter");
+        return registration;
+    }
+
+    @Bean
+    public Filter openEntityManagerInViewFilter() {
+        return new OpenEntityManagerInViewFilter();
     }
 
 }
