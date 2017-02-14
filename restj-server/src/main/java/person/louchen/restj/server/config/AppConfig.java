@@ -1,4 +1,4 @@
-package person.louchen.restj.config;
+package person.louchen.restj.server.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,7 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  */
 @Configuration
 @EnableAspectJAutoProxy
-@ComponentScan("person.louchen.restj.config.app")
+@ComponentScan("person.louchen.restj.server.config.app")
 public class AppConfig {
 
 }

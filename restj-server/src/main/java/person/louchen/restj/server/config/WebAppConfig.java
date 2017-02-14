@@ -1,4 +1,4 @@
-package person.louchen.restj.config;
+package person.louchen.restj.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

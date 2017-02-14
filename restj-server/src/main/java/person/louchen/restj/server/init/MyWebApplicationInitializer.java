@@ -1,6 +1,5 @@
 package person.louchen.restj.server.init;
 
-import ch.qos.logback.ext.spring.web.LogbackConfigListener;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.WebApplicationInitializer;
@@ -8,8 +7,8 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
-import person.louchen.restj.config.AppConfig;
-import person.louchen.restj.config.WebAppConfig;
+import person.louchen.restj.server.config.AppConfig;
+import person.louchen.restj.server.config.WebAppConfig;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;

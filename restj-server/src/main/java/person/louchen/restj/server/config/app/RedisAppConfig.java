@@ -1,4 +1,4 @@
-package person.louchen.restj.config.app;
+package person.louchen.restj.server.config.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
