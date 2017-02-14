@@ -1,4 +1,4 @@
-package person.louchen.restj.config;
+package person.louchen.restj.config.app;
 
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;

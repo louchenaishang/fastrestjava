@@ -29,15 +29,15 @@
 
 
     <!-- jpa -->
-    <bean class="person.louchen.restj.config.JpaAppConfig"/>
+    <bean class="person.louchen.restj.config.app.JpaAppConfig"/>
 
     <!-- redis -->
-    <bean class="person.louchen.restj.config.RedisAppConfig"/>
+    <bean class="person.louchen.restj.config.app.RedisAppConfig"/>
 
     <!-- service -->
-    <bean class="person.louchen.restj.config.ServiceAppConfig"/>
+    <bean class="person.louchen.restj.config.app.ServiceAppConfig"/>
 
     <!-- mvc -->
-    <bean class="person.louchen.restj.config.WebConfig"/>
+    <bean class="person.louchen.restj.config.WebAppConfig"/>
 
 </beans>

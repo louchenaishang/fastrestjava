@@ -1,4 +1,4 @@
-package person.louchen.restj.config;
+package person.louchen.restj.config.app;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.hibernate.cfg.Environment;

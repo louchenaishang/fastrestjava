@@ -24,7 +24,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan("person.louchen.restj.api")
-public class WebConfig extends WebMvcConfigurerAdapter{
+public class WebAppConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public ApiExcerptionHandler apiExcerptionHandler(){

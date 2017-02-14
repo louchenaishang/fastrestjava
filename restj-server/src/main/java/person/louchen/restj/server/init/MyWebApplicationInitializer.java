@@ -2,13 +2,14 @@ package person.louchen.restj.server.init;
 
 import ch.qos.logback.ext.spring.web.LogbackConfigListener;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 import person.louchen.restj.config.AppConfig;
-import person.louchen.restj.config.WebConfig;
+import person.louchen.restj.config.WebAppConfig;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.ServletContext;
@@ -19,6 +20,7 @@ import java.util.EnumSet;
 /**
  * Created by louchen on 2017/2/13.
  */
+@Component
 public class MyWebApplicationInitializer implements WebApplicationInitializer {
 
     @Override
@@ -50,7 +52,7 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
         //基于注解配置的Web容器上下文
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
         //注册Web容器配置类
-        context.register(WebConfig.class);
+        context.register(WebAppConfig.class);
         ServletRegistration.Dynamic servlet = container.addServlet("dispatcher", new DispatcherServlet(context));
         //配置映射路径
         servlet.addMapping("/*");
