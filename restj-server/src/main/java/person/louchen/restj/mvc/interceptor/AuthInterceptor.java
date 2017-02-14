@@ -1,4 +1,4 @@
-package person.louchen.restj.server.interceptor;
+package person.louchen.restj.mvc.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import person.louchen.restj.interfaces.security.AuthService;
-import person.louchen.restj.server.annotation.SkipAuth;
+import person.louchen.restj.mvc.annotation.SkipAuth;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

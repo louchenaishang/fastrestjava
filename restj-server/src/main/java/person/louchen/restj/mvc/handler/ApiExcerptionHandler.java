@@ -1,4 +1,4 @@
-package person.louchen.restj.server.handler;
+package person.louchen.restj.mvc.handler;
 
 
 import org.slf4j.Logger;

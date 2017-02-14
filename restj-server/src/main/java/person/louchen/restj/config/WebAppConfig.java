@@ -1,5 +1,6 @@
-package person.louchen.restj.server.config;
+package person.louchen.restj.config;
 
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -11,11 +12,11 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import person.louchen.restj.server.handler.ApiExcerptionHandler;
-import person.louchen.restj.server.interceptor.AuthInterceptor;
-import person.louchen.restj.server.interceptor.SessionInterceptor;
-import person.louchen.restj.server.interceptor.SignInterceptor;
-import person.louchen.restj.server.jackson.JacksonObjectMapper;
+import person.louchen.restj.mvc.handler.ApiExcerptionHandler;
+import person.louchen.restj.mvc.interceptor.AuthInterceptor;
+import person.louchen.restj.mvc.interceptor.SessionInterceptor;
+import person.louchen.restj.mvc.interceptor.SignInterceptor;
+import person.louchen.restj.mvc.jackson.JacksonObjectMapper;
 
 import java.nio.charset.Charset;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
  */
 @Configuration
 @EnableWebMvc
+@AutoConfigureAfter({JpaAppConfig.class,RedisAppConfig.class})
 @ComponentScan("person.louchen.restj.api")
 public class WebAppConfig extends WebMvcConfigurerAdapter{
 

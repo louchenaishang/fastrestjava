@@ -1,11 +1,6 @@
 package person.louchen.restj.api;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +9,7 @@ import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.param.LoginParam;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
-import person.louchen.restj.server.annotation.SkipAuth;
+import person.louchen.restj.mvc.annotation.SkipAuth;
 
 /**
  * Created by louchen on 2017/2/9.
