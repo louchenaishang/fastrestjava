@@ -3,19 +3,21 @@ package person.louchen.restj.server.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import person.louchen.restj.server.handler.ApiExcerptionHandler;
 import person.louchen.restj.server.interceptor.AuthInterceptor;
 import person.louchen.restj.server.interceptor.SessionInterceptor;
 import person.louchen.restj.server.interceptor.SignInterceptor;
 import person.louchen.restj.server.jackson.JacksonObjectMapper;
 
-import java.util.ArrayList;
+import java.nio.charset.Charset;
 import java.util.List;
 
 /**
@@ -38,10 +40,7 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public StringHttpMessageConverter stringHttpMessageConverter(){
-        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter();
-        List<MediaType> types = new ArrayList<>();
-        types.add(MediaType.TEXT_HTML);
-        stringHttpMessageConverter.setSupportedMediaTypes(types);
+        StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
 
         return stringHttpMessageConverter;
     }
