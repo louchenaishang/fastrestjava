@@ -25,11 +25,6 @@ public class MyWebApplicationInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext container) throws ServletException {
-        container.setInitParameter("logbackConfigLocation","classpath:conf/logback.xml");
-
-        //logback监听器
-        container.addListener(new LogbackConfigListener());
-
         //配置Spring提供的字符编码过滤器
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
