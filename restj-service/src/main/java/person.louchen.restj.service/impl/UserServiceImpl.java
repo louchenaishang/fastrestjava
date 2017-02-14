@@ -25,7 +25,7 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
 
     @Override
     public UserEntity login(String loginName, String loginPwd) throws Exception {
-        UserEntity userEntity = userRepository.findByLoginName(loginName);
+        UserEntity userEntity = userMysqlRepository.findByLoginName(loginName);
         if(userEntity==null){
             throw new BusinessException("账户错误");
         }
@@ -40,7 +40,7 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
 
     @Override
     public UserEntity getOne(String id) throws Exception {
-        UserEntity userEntity = userRepository.findOne(id);
+        UserEntity userEntity = userMysqlRepository.findOne(id);
         return userEntity;
     }
 
@@ -53,12 +53,12 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
             userEntity.setLoginPwd("123456");
         }
         userEntity.setLoginPwd(BCryptUtil.hashpw(userEntity.getLoginPwd()));
-        return userRepository.saveAndFlush(userEntity);
+        return userMysqlRepository.saveAndFlush(userEntity);
     }
 
     @Override
     public UserEntity editOne(UserEntity userEntity) throws Exception {
-        UserEntity old = userRepository.findOne(userEntity.getId());
+        UserEntity old = userMysqlRepository.findOne(userEntity.getId());
 
         old.setName(userEntity.getName());
         old.setSex(userEntity.getSex());
@@ -67,31 +67,31 @@ public class UserServiceImpl extends AbstractBusinessServiceImpl implements User
         old.setAddr(userEntity.getAddr());
         old.setPhone(userEntity.getPhone());
 
-        return userRepository.saveAndFlush(old);
+        return userMysqlRepository.saveAndFlush(old);
     }
 
     @Override
     public boolean deleteOne(String id) throws Exception {
-        UserEntity userEntity = userRepository.findOne(id);
-        userRepository.delete(userEntity);
+        UserEntity userEntity = userMysqlRepository.findOne(id);
+        userMysqlRepository.delete(userEntity);
         return true;
     }
 
     @Override
     public List<UserEntity> getAll(String name) throws Exception {
         if(EmptyUtil.isEmpty(name)){
-            return userRepository.findAll();
+            return userMysqlRepository.findAll();
         }else{
-            return userRepository.findByNameLike(name);
+            return userMysqlRepository.findByNameLike(name);
         }
     }
 
     @Override
     public Page<UserEntity> getAll(String name, Pageable pageable) throws Exception {
         if(EmptyUtil.isEmpty(name)){
-            return userRepository.findAll(pageable);
+            return userMysqlRepository.findAll(pageable);
         }else{
-            return userRepository.findByNameLike(name,pageable);
+            return userMysqlRepository.findByNameLike(name,pageable);
         }
     }
 
