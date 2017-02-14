@@ -1,9 +1,11 @@
 package person.louchen.restj.config.app;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -13,46 +15,29 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
+@PropertySource({"classpath:conf/redis.properties"})
 @EnableRedisRepositories("person.louchen.restj.model.repository.redis")
 public class RedisAppConfig {
 
-    @Value("${redis.host}")
-    private String redisHost;
-
-    @Value("${redis.port}")
-    private int redisPort;
-
-    @Value("${redis.password}")
-    private String redisPassword;
-
-    @Value("${redis.maxTotal}")
-    private int redisMaxTotal;
-
-    @Value("${redis.maxIdle}")
-    private int redisMaxIdle;
-
-    @Value("${redis.maxWaitMillis}")
-    private long redisMaxWaitMillis;
-
-    @Value("${redis.testOnBorrow}")
-    private boolean redisTestOnBorrow;
+    @Autowired
+    public Environment env;
 
     @Bean
-    JedisPoolConfig jedisPoolConfig(){
+    JedisPoolConfig jedisPoolConfig() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxTotal(redisMaxTotal);
-        jedisPoolConfig.setMaxIdle(redisMaxIdle);
-        jedisPoolConfig.setMaxWaitMillis(redisMaxWaitMillis);
-        jedisPoolConfig.setTestOnBorrow(redisTestOnBorrow);
+        jedisPoolConfig.setMaxTotal(env.getProperty("redis.maxTotal", Integer.class));
+        jedisPoolConfig.setMaxIdle(env.getProperty("redis.maxIdle", Integer.class));
+        jedisPoolConfig.setMaxWaitMillis(env.getProperty("redis.maxWaitMillis", Long.class));
+        jedisPoolConfig.setTestOnBorrow(env.getProperty("redis.testOnBorrow",Boolean.class));
         return jedisPoolConfig;
     }
 
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory factory = new JedisConnectionFactory();
-        factory.setHostName(redisHost);
-        factory.setPort(redisPort);
-        factory.setPassword(redisPassword);
+        factory.setHostName(env.getProperty("redis.host"));
+        factory.setPort(env.getProperty("redis.port", Integer.class));
+        factory.setPassword(env.getProperty("redis.password"));
         factory.setUsePool(true);
         factory.setPoolConfig(jedisPoolConfig());
         return factory;

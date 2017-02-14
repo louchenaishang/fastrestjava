@@ -1,11 +1,13 @@
 package person.louchen.restj.config.app;
 
 import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 import person.louchen.restj.security.SecurityEntity;
@@ -19,36 +21,34 @@ import java.util.Properties;
  * Created by louchen on 2017/2/13.
  */
 @Configuration
+@PropertySource({"classpath:conf/config.properties", "classpath:conf/version.properties", "classpath:conf/rest.properties"})
 @ComponentScan("person.louchen.restj.service.impl")
 public class ServiceAppConfig {
 
-    @Value("${rest.appid}")
-    private String restAppId;
-
-    @Value("${rest.appSecret}")
-    private String restSecret;
+    @Autowired
+    public Environment env;
 
     @Bean
-    public SecurityEntity securityEntity(){
+    public SecurityEntity securityEntity() {
         SecurityEntity se = new SecurityEntity();
-        se.setAppId(restAppId);
-        se.setAppSecret(restSecret);
+        se.setAppId(env.getProperty("rest.appid"));
+        se.setAppSecret(env.getProperty("rest.appSecret"));
 
         return se;
     }
 
     @Bean
-    public SecurityEntityManager securityEntityManager(){
+    public SecurityEntityManager securityEntityManager() {
         SecurityEntityManager sem = new SecurityEntityManager();
         Map<String, SecurityEntity> map = new HashMap<>();
-        map.put(restAppId,securityEntity());
+        map.put(env.getProperty("rest.appid"), securityEntity());
         sem.setMap(map);
 
         return sem;
     }
 
     @Bean
-    public static AutowiredAnnotationBeanPostProcessor autowiredAnnotationBeanPostProcessor(){
+    public static AutowiredAnnotationBeanPostProcessor autowiredAnnotationBeanPostProcessor() {
         return new AutowiredAnnotationBeanPostProcessor();
     }
 

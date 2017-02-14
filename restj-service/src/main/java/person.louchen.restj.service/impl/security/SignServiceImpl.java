@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import person.louchen.restj.framework.utils.MD5Util;
 import person.louchen.restj.interfaces.security.SignService;
-import person.louchen.restj.service.exception.BusinessException;
 import person.louchen.restj.security.SecurityEntity;
 import person.louchen.restj.security.SecurityEntityManager;
+import person.louchen.restj.service.exception.BusinessException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +34,9 @@ public class SignServiceImpl implements SignService {
             throw new BusinessException("签名验证失败");
         }
         if (StringUtils.isBlank(appNonceStr)) {
+            throw new BusinessException("签名验证失败");
+        }
+        if(appNonceStr.length()!=32){
             throw new BusinessException("签名验证失败");
         }
 
