@@ -1,0 +1,15 @@
+app:
+  name: restj-rest
+logging:
+  path: ./
+  file: restj-rest.log
+server:
+  port: 8083
+  context-path: /
+  tomcat:
+    max-threads: 1000
+    uri-encoding: UTF-8
+    basedir: ./
+    access-log-enabled: true
+    access-log-pattern: "%h %l %u %t &quot;%r&quot; %s %b"
+
