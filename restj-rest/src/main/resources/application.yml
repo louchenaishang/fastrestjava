@@ -25,11 +25,23 @@ server:
     enabled: true
     mime-types: "application/json"
     min-response-size: 1024
+security:
+  user:
+    name: admin
+    password: secret
+management:
+  context-path: /manage
+  port: 8081
+  address: 127.0.0.1
+  security:
+    role: SUPERUSER
 endpoints:
   dump.enabled: false
   heapdump.enabled: false
   env.enabled: false
   logfile.enabled: false
-  shutdown.enabled: false
+  shutdown:
+    enabled: true
+    sensitive: false
   trace.enabled: false
 
