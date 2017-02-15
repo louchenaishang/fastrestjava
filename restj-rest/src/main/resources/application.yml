@@ -1,15 +1,35 @@
-app:
-  name: restj-rest
+#see http://docs.spring.io/spring-boot/docs/1.4.4.RELEASE/reference/html/common-application-properties.html
+spring:
+  application:
+    name: restj-rest
+  mvc:
+    dispatch-trace-request: false
+    dispatch-options-request: true
+    favicon:
+      enabled: false
 logging:
+  config: classpath:conf/logback.xml
   path: ./
   file: restj-rest.log
 server:
-  port: 8083
+  port: 8082
   context-path: /
   tomcat:
+    min-spare-threads: 10
     max-threads: 1000
     uri-encoding: UTF-8
     basedir: ./
     access-log-enabled: true
     access-log-pattern: "%h %l %u %t &quot;%r&quot; %s %b"
+  compression:
+    enabled: true
+    mime-types: "application/json"
+    min-response-size: 1024
+endpoints:
+  dump.enabled: false
+  heapdump.enabled: false
+  env.enabled: false
+  logfile.enabled: false
+  shutdown.enabled: false
+  trace.enabled: false
 
