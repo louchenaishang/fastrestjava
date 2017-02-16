@@ -13,6 +13,10 @@ logging:
   file: restj-rest.log
 server:
   port: 8082
+#  ssl:
+#    enabled: true
+#    key-store: classpath:keystore.jks
+#    key-password: secret
   context-path: /
   tomcat:
     min-spare-threads: 10
@@ -25,23 +29,24 @@ server:
     enabled: true
     mime-types: "application/json"
     min-response-size: 1024
-security:
-  user:
-    name: admin
-    password: secret
-management:
-  context-path: /manage
-  port: 8081
-  address: 127.0.0.1
-  security:
-    role: SUPERUSER
+#和https冲突
+#security:
+#  user:
+#    name: admin
+#    password: secret
+#management:
+#  context-path: /manage
+#  port: 8081
+#  address: 127.0.0.1
+#  security:
+#    role: SUPERUSER
 endpoints:
   dump.enabled: false
   heapdump.enabled: false
   env.enabled: false
   logfile.enabled: false
   shutdown:
-    enabled: true
-    sensitive: false
+    enabled: false
+    sensitive: true
   trace.enabled: false
 
