@@ -69,7 +69,7 @@ spring:
       sign: true
 
 logging:
-  config: classpath:conf/logback.xml
+  config: classpath:logback.xml
   path: ./
   file: restj-rest.log
 server:
