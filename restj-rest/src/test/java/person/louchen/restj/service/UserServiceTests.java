@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import person.louchen.restj.config.JpaConfig;
 import person.louchen.restj.config.RedisConfig;
 import person.louchen.restj.config.ServiceConfig;
-import person.louchen.restj.framework.spring.SpringActiveProfileResolver;
+import person.louchen.restj.framework.spring.SpringProfilesActiveResolver;
 import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.model.entity.UserEntity;
 
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = {JpaConfig.class, RedisConfig.class, ServiceConfig.class})
-@ActiveProfiles(resolver = SpringActiveProfileResolver.class)
+@ActiveProfiles(resolver = SpringProfilesActiveResolver.class)
 public class UserServiceTests {
 
     @Autowired
