@@ -5,10 +5,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-import person.louchen.restj.config.JpaAppTestConfig;
+
+import person.louchen.restj.config.JpaConfig;
 import person.louchen.restj.config.RedisConfig;
 import person.louchen.restj.config.ServiceConfig;
+import person.louchen.restj.framework.spring.SpringActiveProfileResolver;
 import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.model.entity.UserEntity;
 
@@ -18,7 +21,8 @@ import java.util.List;
  * Created by louchen on 2017/2/16.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {JpaAppTestConfig.class, RedisConfig.class, ServiceConfig.class})
+@SpringBootTest(classes = {JpaConfig.class, RedisConfig.class, ServiceConfig.class})
+@ActiveProfiles(resolver = SpringActiveProfileResolver.class)
 public class UserServiceTests {
 
     @Autowired
@@ -39,10 +43,12 @@ public class UserServiceTests {
     @Test
     public void getUsers() throws Exception {
         List<UserEntity> list = userService.getAll("");
+        System.out.println("getUsers1");
         System.out.println(list.size());
 
 
     }
+
 
 
 
