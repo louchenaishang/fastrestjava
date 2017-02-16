@@ -13,7 +13,7 @@ import org.springframework.session.web.http.DefaultCookieSerializer;
 @Configuration
 @PropertySource({"classpath:conf/config.properties"})
 @EnableRedisHttpSession
-public class SessionAppConfig {
+public class SessionConfig {
 
     @Autowired
     public Environment env;

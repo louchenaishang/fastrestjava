@@ -23,7 +23,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource({"classpath:conf/config.properties", "classpath:conf/version.properties", "classpath:conf/rest.properties"})
 @ComponentScan("person.louchen.restj.service.impl")
-public class ServiceAppConfig {
+public class ServiceConfig {
 
     @Autowired
     public Environment env;

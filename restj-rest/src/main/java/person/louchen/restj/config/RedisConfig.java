@@ -17,7 +17,7 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 @PropertySource({"classpath:conf/redis.properties"})
 @EnableRedisRepositories("person.louchen.restj.model.repository.redis")
-public class RedisAppConfig {
+public class RedisConfig {
 
     @Autowired
     public Environment env;

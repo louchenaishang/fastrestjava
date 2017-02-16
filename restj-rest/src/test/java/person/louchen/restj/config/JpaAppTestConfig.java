@@ -3,8 +3,8 @@ package person.louchen.restj.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -15,15 +15,15 @@ import org.springframework.transaction.PlatformTransactionManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-@Configuration
-@PropertySource({"classpath:conf/jdbc.properties"})
+@TestConfiguration
+@PropertySource({"classpath:conf/jdbc-test.properties"})
 @EnableJpaRepositories(basePackages = "person.louchen.restj.model.repository.mysql")
-public class JpaAppConfig {
+public class JpaAppTestConfig {
 
     @Autowired
     public org.springframework.core.env.Environment env;
 
-    @Bean
+    @Bean(initMethod = "init",destroyMethod = "close")
     public DruidDataSource dataSource() throws SQLException {
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName(env.getProperty("jdbc.driver"));
@@ -43,8 +43,6 @@ public class JpaAppConfig {
         dataSource.setTestOnBorrow(env.getProperty("jdbc.testOnBorrow", Boolean.class));
         dataSource.setTestOnReturn(env.getProperty("jdbc.testOnReturn", Boolean.class));
         dataSource.setFilters(env.getProperty("jdbc.filters"));
-
-        dataSource.init();
 
         return dataSource;
     }

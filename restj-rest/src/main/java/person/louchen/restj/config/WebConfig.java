@@ -1,13 +1,10 @@
 package person.louchen.restj.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -24,10 +21,8 @@ import person.louchen.restj.mvc.interceptor.SessionInterceptor;
 import person.louchen.restj.mvc.interceptor.SignInterceptor;
 import person.louchen.restj.mvc.jackson.JacksonObjectMapper;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import java.nio.charset.Charset;
-import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -35,9 +30,9 @@ import java.util.List;
  */
 @Configuration
 @EnableWebMvc
-@AutoConfigureAfter({JpaAppConfig.class,RedisAppConfig.class})
+@AutoConfigureAfter({JpaConfig.class, RedisConfig.class})
 @ComponentScan("person.louchen.restj.api")
-public class WebAppConfig extends WebMvcConfigurerAdapter{
+public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public ApiExcerptionHandler apiExcerptionHandler(){
