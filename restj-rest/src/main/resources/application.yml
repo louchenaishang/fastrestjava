@@ -12,12 +12,7 @@ logging:
   path: ./
   file: restj-rest.log
 server:
-  http-port: 8082
-  port: 8443
-  ssl:
-    enabled: true
-    key-store: classpath:keystore.jks
-    key-password: secret
+  port: 8082
   context-path: /
   tomcat:
     min-spare-threads: 10
