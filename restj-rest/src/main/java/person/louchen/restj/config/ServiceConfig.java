@@ -21,7 +21,6 @@ import java.util.Properties;
  * Created by louchen on 2017/2/13.
  */
 @Configuration
-@PropertySource({"classpath:conf/config.properties", "classpath:conf/version.properties", "classpath:conf/rest.properties"})
 @ComponentScan("person.louchen.restj.service.impl")
 public class ServiceConfig {
 
@@ -31,8 +30,8 @@ public class ServiceConfig {
     @Bean
     public SecurityEntity securityEntity() {
         SecurityEntity se = new SecurityEntity();
-        se.setAppId(env.getProperty("rest.appid"));
-        se.setAppSecret(env.getProperty("rest.appSecret"));
+        se.setAppId(env.getProperty("spring.sys.rest.app-id"));
+        se.setAppSecret(env.getProperty("spring.sys.rest.app-secret"));
 
         return se;
     }
@@ -41,7 +40,7 @@ public class ServiceConfig {
     public SecurityEntityManager securityEntityManager() {
         SecurityEntityManager sem = new SecurityEntityManager();
         Map<String, SecurityEntity> map = new HashMap<>();
-        map.put(env.getProperty("rest.appid"), securityEntity());
+        map.put(env.getProperty("spring.sys.rest.app-id"), securityEntity());
         sem.setMap(map);
 
         return sem;

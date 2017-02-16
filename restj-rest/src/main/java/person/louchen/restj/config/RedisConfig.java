@@ -15,7 +15,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import redis.clients.jedis.JedisPoolConfig;
 
 @Configuration
-@PropertySource({"classpath:conf/redis.properties"})
 @EnableRedisRepositories("person.louchen.restj.model.repository.redis")
 public class RedisConfig {
 
@@ -25,19 +24,20 @@ public class RedisConfig {
     @Bean
     JedisPoolConfig jedisPoolConfig() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-        jedisPoolConfig.setMaxTotal(env.getProperty("redis.maxTotal", Integer.class));
-        jedisPoolConfig.setMaxIdle(env.getProperty("redis.maxIdle", Integer.class));
-        jedisPoolConfig.setMaxWaitMillis(env.getProperty("redis.maxWaitMillis", Long.class));
-        jedisPoolConfig.setTestOnBorrow(env.getProperty("redis.testOnBorrow",Boolean.class));
+        jedisPoolConfig.setMaxTotal(env.getProperty("spring.redis.pool.max-active", Integer.class));
+        jedisPoolConfig.setMaxIdle(env.getProperty("spring.redis.pool.max-idle", Integer.class));
+        jedisPoolConfig.setMaxWaitMillis(env.getProperty("spring.redis.pool.max-wait", Long.class));
+        jedisPoolConfig.setTestOnBorrow(env.getProperty("spring.redis.pool.testOnBorrow",Boolean.class));
         return jedisPoolConfig;
     }
 
     @Bean
     JedisConnectionFactory jedisConnectionFactory() {
         JedisConnectionFactory factory = new JedisConnectionFactory();
-        factory.setHostName(env.getProperty("redis.host"));
-        factory.setPort(env.getProperty("redis.port", Integer.class));
-        factory.setPassword(env.getProperty("redis.password"));
+        factory.setHostName(env.getProperty("spring.redis.host"));
+        factory.setPort(env.getProperty("spring.redis.port", Integer.class));
+        factory.setPassword(env.getProperty("spring.redis.password"));
+        factory.setTimeout(env.getProperty("spring.redis.timeout", Integer.class));
         factory.setUsePool(true);
         factory.setPoolConfig(jedisPoolConfig());
         return factory;

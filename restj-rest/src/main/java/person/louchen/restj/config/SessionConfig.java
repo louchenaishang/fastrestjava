@@ -11,7 +11,6 @@ import org.springframework.session.data.redis.config.annotation.web.http.RedisHt
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
 @Configuration
-@PropertySource({"classpath:conf/config.properties"})
 @EnableRedisHttpSession
 public class SessionConfig {
 
@@ -21,7 +20,7 @@ public class SessionConfig {
     @Bean
     DefaultCookieSerializer defaultCookieSerializer() {
         DefaultCookieSerializer defaultCookieSerializer = new DefaultCookieSerializer();
-        defaultCookieSerializer.setDomainName(env.getProperty("sys.domain"));
+        defaultCookieSerializer.setDomainName(env.getProperty("spring.sys.session.domain"));
         defaultCookieSerializer.setUseBase64Encoding(true);
 
         return defaultCookieSerializer;
@@ -30,7 +29,7 @@ public class SessionConfig {
     @Bean
     RedisHttpSessionConfiguration redisHttpSessionConfiguration() {
         RedisHttpSessionConfiguration redisHttpSessionConfiguration = new RedisHttpSessionConfiguration();
-        redisHttpSessionConfiguration.setMaxInactiveIntervalInSeconds(env.getProperty("sys.maxInactiveIntervalInSeconds",Integer.class));
+        redisHttpSessionConfiguration.setMaxInactiveIntervalInSeconds(env.getProperty("spring.sys.session.max-inactive-interval-in-seconds",Integer.class));
         redisHttpSessionConfiguration.setCookieSerializer(defaultCookieSerializer());
 
         return redisHttpSessionConfiguration;

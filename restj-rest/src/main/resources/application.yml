@@ -7,6 +7,67 @@ spring:
     dispatch-options-request: true
     favicon:
       enabled: false
+  datasource:
+    url: jdbc:mysql://127.0.0.1/testDB?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    initialSize: 10
+    maxActive: 100
+    minIdle: 0
+    maxWait: 60000
+    defaultAutoCommit: false
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    filters: wall
+  jpa:
+    generate-ddl: true
+    open-in-view: true
+    properties:
+      hibernate:
+        ddl-auto: update
+        packagesToScan: person.louchen.restj.model.entity
+        connection:
+          driver_class: com.mysql.jdbc.Driver
+          autocommit: false
+          #调整事务隔离级别
+          #1:读操作未提交（Read Uncommitted）
+          #2:读操作已提交（Read Committed）
+          #4:可重读（Repeatable Read）
+          #8:可串行化（Serializable)
+          isolation: 4
+        dialect: org.hibernate.dialect.MySQLDialect
+        show_sql: true
+        format_sql: true
+        max_fetch_depth: 3
+        current_session_context_class: thread
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 0
+    pool:
+      max-active: 1000
+      max-idle: 10
+      max-wait: 2000
+      testOnBorrow: true
+  zookeeper:
+    server:
+  #应用级别常量
+  sys:
+    project.version: 1.0.0
+    rest:
+      app-id: oR3YV1tti8
+      app-secret: tuJM@)DirR9%1)ijp#
+    session:
+      domain: localhost.com
+      max-inactive-interval-in-seconds: 1800
+    interceptor:
+      sign: true
+
 logging:
   config: classpath:conf/logback.xml
   path: ./
@@ -34,4 +95,3 @@ endpoints:
     enabled: false
     sensitive: true
   trace.enabled: false
-

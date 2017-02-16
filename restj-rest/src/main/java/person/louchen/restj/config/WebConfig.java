@@ -126,18 +126,4 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         return characterEncodingFilter;
     }
 
-    @Bean
-    public FilterRegistrationBean openEntityManagerInViewFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(openEntityManagerInViewFilter());
-        registration.addUrlPatterns("/*");
-        registration.setName("openEntityManagerInViewFilter");
-        return registration;
-    }
-
-    @Bean
-    public Filter openEntityManagerInViewFilter() {
-        return new OpenEntityManagerInViewFilter();
-    }
-
 }

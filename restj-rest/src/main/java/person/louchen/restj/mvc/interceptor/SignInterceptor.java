@@ -30,7 +30,7 @@ public class SignInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
-        if(!env.getProperty("sys.enableSignVerify",Boolean.class)){
+        if(!env.getProperty("spring.sys.interceptor.sign",Boolean.class)){
             return true;
         }
         if(request.getMethod().toUpperCase().equals(RequestMethod.OPTIONS.toString())){
