@@ -13,7 +13,7 @@
     <groupId>person.louchen</groupId>
     <artifactId>restj</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2-RELEASE</version>
     <modules>
         <module>restj-framework</module>
         <module>restj-service</module>
@@ -26,11 +26,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <!-- modules -->
-        <version.restj-framework>1.0.2-SNAPSHOT</version.restj-framework>
-        <version.restj-model>1.0.2-SNAPSHOT</version.restj-model>
-        <version.restj-interface>1.0.2-SNAPSHOT</version.restj-interface>
-        <version.restj-service>1.0.2-SNAPSHOT</version.restj-service>
-        <version.restj-rest>1.0.2-SNAPSHOT</version.restj-rest>
+        <version.restj-framework>1.0.2-RELEASE</version.restj-framework>
+        <version.restj-model>1.0.2-RELEASE</version.restj-model>
+        <version.restj-interface>1.0.2-RELEASE</version.restj-interface>
+        <version.restj-service>1.0.2-RELEASE</version.restj-service>
+        <version.restj-rest>1.0.2-RELEASE</version.restj-rest>
         <!-- servlet -->
         <servlet-api.version>3.1.0</servlet-api.version>
         <!-- spring版本号 -->
