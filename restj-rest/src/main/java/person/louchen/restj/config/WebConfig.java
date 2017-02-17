@@ -21,10 +21,8 @@ import person.louchen.restj.mvc.interceptor.SessionInterceptor;
 import person.louchen.restj.mvc.interceptor.SignInterceptor;
 import person.louchen.restj.mvc.jackson.JacksonObjectMapper;
 
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import java.nio.charset.Charset;
-import java.util.EnumSet;
 import java.util.List;
 
 /**
@@ -32,9 +30,9 @@ import java.util.List;
  */
 @Configuration
 @EnableWebMvc
-@AutoConfigureAfter({JpaAppConfig.class,RedisAppConfig.class})
+@AutoConfigureAfter({JpaConfig.class, RedisConfig.class})
 @ComponentScan("person.louchen.restj.api")
-public class WebAppConfig extends WebMvcConfigurerAdapter{
+public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public ApiExcerptionHandler apiExcerptionHandler(){
@@ -126,20 +124,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter{
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
-    }
-
-    @Bean
-    public FilterRegistrationBean openEntityManagerInViewFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(openEntityManagerInViewFilter());
-        registration.addUrlPatterns("/*");
-        registration.setName("openEntityManagerInViewFilter");
-        return registration;
-    }
-
-    @Bean
-    public Filter openEntityManagerInViewFilter() {
-        return new OpenEntityManagerInViewFilter();
     }
 
 }

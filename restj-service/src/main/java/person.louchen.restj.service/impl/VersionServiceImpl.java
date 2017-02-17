@@ -17,7 +17,7 @@ public class VersionServiceImpl implements VersionService {
 
     @Override
     public String get() throws Exception {
-        return env.getProperty("project.version");
+        return env.getProperty("spring.sys.project.version");
     }
 
 }

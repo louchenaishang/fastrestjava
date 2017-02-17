@@ -26,7 +26,7 @@ public class VersionController {
      */
     @RequestMapping(value = "", method = {RequestMethod.GET})
     @SkipAuth
-    public ResultObject getUserList() {
+    public ResultObject getVersion() {
         ResultObject resultObject = new ResultObject();
         try {
             resultObject.setBody(versionService.get());
