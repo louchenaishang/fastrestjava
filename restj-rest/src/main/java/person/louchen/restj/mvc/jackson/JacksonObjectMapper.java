@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.apache.commons.lang.StringUtils;
 
 import java.text.DateFormat;
@@ -93,8 +93,8 @@ public class JacksonObjectMapper extends ObjectMapper {
     }
 
     private void hibernateMethod(){
-        Hibernate4Module hm = new Hibernate4Module();
-        hm.disable(Hibernate4Module.Feature.USE_TRANSIENT_ANNOTATION);
+        Hibernate5Module hm = new Hibernate5Module();
+        hm.disable(Hibernate5Module.Feature.USE_TRANSIENT_ANNOTATION);
         registerModule(hm);
     }
 
