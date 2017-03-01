@@ -1,7 +1,6 @@
 package person.louchen.restj.config;
 
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,8 +8,6 @@ import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -21,7 +18,6 @@ import person.louchen.restj.mvc.interceptor.SessionInterceptor;
 import person.louchen.restj.mvc.interceptor.SignInterceptor;
 import person.louchen.restj.mvc.jackson.JacksonObjectMapper;
 
-import javax.servlet.Filter;
 import java.nio.charset.Charset;
 import java.util.List;
 
@@ -32,27 +28,27 @@ import java.util.List;
 @EnableWebMvc
 @AutoConfigureAfter({JpaConfig.class, RedisConfig.class})
 @ComponentScan("person.louchen.restj.api")
-public class WebConfig extends WebMvcConfigurerAdapter{
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean
-    public ApiExcerptionHandler apiExcerptionHandler(){
+    public ApiExcerptionHandler apiExcerptionHandler() {
         return new ApiExcerptionHandler();
     }
 
     @Bean
-    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter(){
+    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
         return new ByteArrayHttpMessageConverter();
     }
 
     @Bean
-    public StringHttpMessageConverter stringHttpMessageConverter(){
+    public StringHttpMessageConverter stringHttpMessageConverter() {
         StringHttpMessageConverter stringHttpMessageConverter = new StringHttpMessageConverter(Charset.forName("UTF-8"));
 
         return stringHttpMessageConverter;
     }
 
     @Bean
-    public JacksonObjectMapper jacksonObjectMapper(){
+    public JacksonObjectMapper jacksonObjectMapper() {
         JacksonObjectMapper jacksonObjectMapper = new JacksonObjectMapper();
         jacksonObjectMapper.setIgnoreProperty("version,handler,fieldHandler,hibernateLazyInitializer,JavassistLazyInitializer,PersistentSet");
         jacksonObjectMapper.setDateFormatPattern("yyyy-MM-dd HH:mm:ss");
@@ -62,7 +58,7 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     }
 
     @Bean
-    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter(){
+    public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
         MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
         mappingJackson2HttpMessageConverter.setObjectMapper(jacksonObjectMapper());
 
@@ -86,17 +82,17 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     }
 
     @Bean
-    public SignInterceptor signInterceptor(){
+    public SignInterceptor signInterceptor() {
         return new SignInterceptor();
     }
 
     @Bean
-    public SessionInterceptor sessionInterceptor(){
+    public SessionInterceptor sessionInterceptor() {
         return new SessionInterceptor();
     }
 
     @Bean
-    public AuthInterceptor authInterceptor(){
+    public AuthInterceptor authInterceptor() {
         return new AuthInterceptor();
     }
 
@@ -107,23 +103,6 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         registry.addInterceptor(authInterceptor()).addPathPatterns("/**");
 
         super.addInterceptors(registry);
-    }
-
-    @Bean
-    public FilterRegistrationBean characterEncodingFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(characterEncodingFilter());
-        registration.addUrlPatterns("/*");
-        registration.setName("characterEncodingFilter");
-        return registration;
-    }
-
-    @Bean
-    public Filter characterEncodingFilter() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return characterEncodingFilter;
     }
 
 }

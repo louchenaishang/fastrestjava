@@ -7,6 +7,11 @@ spring:
     dispatch-options-request: true
     favicon:
       enabled: false
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
   datasource:
     url: jdbc:mysql://127.0.0.1/testDB?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
     username: root
