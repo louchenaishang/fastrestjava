@@ -112,20 +112,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ThreadPoolTaskExecutor mvcTaskExecutor(){
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(env.getProperty("spring.mvc.async.pool.core-size",Integer.class));
-        Integer maxSize = env.getProperty("spring.mvc.async.pool.max-size", Integer.class);
-        Integer queueCapacity = env.getProperty("spring.mvc.async.pool.queue-capacity", Integer.class);
-        if(maxSize.intValue()==-1){
-            executor.setMaxPoolSize(Integer.MAX_VALUE);
-        }else{
-            executor.setMaxPoolSize(maxSize);
-        }
-        if(queueCapacity.intValue()==-1){
-            executor.setQueueCapacity(Integer.MAX_VALUE);
-        }else{
-            executor.setQueueCapacity(queueCapacity);
-        }
-
         return executor;
 
     }

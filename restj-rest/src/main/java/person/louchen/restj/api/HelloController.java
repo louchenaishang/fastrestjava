@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import person.louchen.restj.mvc.annotation.SkipAuth;
 
+import java.util.concurrent.Callable;
+
 /**
  * Created by louchen on 2017/3/1.
  */
@@ -14,9 +16,20 @@ public class HelloController {
 
 
     @RequestMapping(value = "", method = {RequestMethod.GET})
-    public String say() {
-        return "hello ^-^";
+    @SkipAuth
+    public Callable<String> say() throws InterruptedException {
+        return () -> {
+            Thread.currentThread().sleep(1000*1);
+            return "hello ^-^"+Thread.currentThread().getName();
+        };
     }
+
+//    @RequestMapping(value = "", method = {RequestMethod.GET})
+//    @SkipAuth
+//    public String say() throws InterruptedException {
+//        Thread.currentThread().sleep(1000*20);
+//        return "hello ^-^";
+//    }
 
 
 }
