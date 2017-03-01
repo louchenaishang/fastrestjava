@@ -3,6 +3,7 @@ package person.louchen.restj.mvc.interceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -24,11 +25,17 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
+    public Environment env;
+
+    @Autowired
     private AuthService authService;
 
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
+        if(!env.getProperty("spring.sys.interceptor.auth",Boolean.class)){
+            return true;
+        }
         if(request.getMethod().toUpperCase().equals(RequestMethod.OPTIONS.toString())){
             return true;
         }

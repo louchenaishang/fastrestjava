@@ -20,5 +20,6 @@ spring:
       max-inactive-interval-in-seconds: 1800
     interceptor:
       sign: true
+      auth: true
 server:
   port: 8082

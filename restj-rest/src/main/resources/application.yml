@@ -3,6 +3,12 @@ spring:
   application:
     name: restj-rest
   mvc:
+    async:
+      pool:
+        core-size: 1
+        max-size: -1
+        queue-capacity: -1
+      request-timeout: 10000
     dispatch-trace-request: false
     dispatch-options-request: true
     favicon:
@@ -71,8 +77,8 @@ spring:
       domain: localhost.com
       max-inactive-interval-in-seconds: 1800
     interceptor:
-      sign: true
-
+      sign: false
+      auth: true
 logging:
   config: classpath:logback.xml
   path: ./

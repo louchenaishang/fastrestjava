@@ -1,17 +1,17 @@
 package person.louchen.restj.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.web.servlet.config.annotation.*;
 import person.louchen.restj.mvc.handler.ApiExcerptionHandler;
 import person.louchen.restj.mvc.interceptor.AuthInterceptor;
 import person.louchen.restj.mvc.interceptor.SessionInterceptor;
@@ -20,6 +20,7 @@ import person.louchen.restj.mvc.jackson.JacksonObjectMapper;
 
 import java.nio.charset.Charset;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by louchen on 2017/2/13.
@@ -29,6 +30,9 @@ import java.util.List;
 @AutoConfigureAfter({JpaConfig.class, RedisConfig.class})
 @ComponentScan("person.louchen.restj.api")
 public class WebConfig extends WebMvcConfigurerAdapter {
+
+    @Autowired
+    public Environment env;
 
     @Bean
     public ApiExcerptionHandler apiExcerptionHandler() {
@@ -103,6 +107,33 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(authInterceptor()).addPathPatterns("/**");
 
         super.addInterceptors(registry);
+    }
+
+    @Bean
+    public ThreadPoolTaskExecutor mvcTaskExecutor(){
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(env.getProperty("spring.mvc.async.pool.core-size",Integer.class));
+        Integer maxSize = env.getProperty("spring.mvc.async.pool.max-size", Integer.class);
+        Integer queueCapacity = env.getProperty("spring.mvc.async.pool.queue-capacity", Integer.class);
+        if(maxSize.intValue()==-1){
+            executor.setMaxPoolSize(Integer.MAX_VALUE);
+        }else{
+            executor.setMaxPoolSize(maxSize);
+        }
+        if(queueCapacity.intValue()==-1){
+            executor.setQueueCapacity(Integer.MAX_VALUE);
+        }else{
+            executor.setQueueCapacity(queueCapacity);
+        }
+
+        return executor;
+
+    }
+
+    @Override
+    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+        configurer.setDefaultTimeout(env.getProperty("spring.mvc.async.request-timeout",Long.class));
+        configurer.setTaskExecutor(mvcTaskExecutor());
     }
 
 }
