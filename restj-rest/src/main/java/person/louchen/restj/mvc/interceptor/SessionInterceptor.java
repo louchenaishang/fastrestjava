@@ -2,10 +2,10 @@ package person.louchen.restj.mvc.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import person.louchen.restj.security.SecurityConstant;
-import person.louchen.restj.security.SecurityHolder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,17 +21,18 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Autowired
+    public Environment env;
+
 
     @Override
     public boolean preHandle(final HttpServletRequest request, final HttpServletResponse response, final Object handler)
             throws Exception {
-        if(request.getMethod().toUpperCase().equals(RequestMethod.OPTIONS.toString())){
+        if (request.getMethod().toUpperCase().equals(RequestMethod.OPTIONS.toString())) {
             return true;
         }
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(SecurityConstant.SESSION_TIMEOUT);
-        Object attribute = session.getAttribute(SecurityConstant.SESSION_STORAGE_KEY);
-        SecurityHolder.set((String) attribute);
+        session.setMaxInactiveInterval(env.getProperty("spring.sys.session.max-inactive-interval-in-seconds", Integer.class));
         return true;
     }
 

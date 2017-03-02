@@ -9,6 +9,8 @@ import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
 import person.louchen.restj.mvc.annotation.SkipAuth;
 
+import java.util.concurrent.Callable;
+
 /**
  * Created by louchen on 2017/2/8.
  */
@@ -26,17 +28,18 @@ public class VersionController {
      */
     @RequestMapping(value = "", method = {RequestMethod.GET})
     @SkipAuth
-    public ResultObject getVersion() {
-        ResultObject resultObject = new ResultObject();
-        try {
-            resultObject.setBody(versionService.get());
-        } catch (Exception e) {
-            resultObject.setStatus(ResultStatus.ERROR);
-            resultObject.setBody(e.getMessage());
-        }
-        return resultObject;
+    public Callable<ResultObject> getVersion() {
+        return () -> {
+            ResultObject resultObject = new ResultObject();
+            try {
+                resultObject.setBody(versionService.get());
+            } catch (Exception e) {
+                resultObject.setStatus(ResultStatus.ERROR);
+                resultObject.setBody(e.getMessage());
+            }
+            return resultObject;
+        };
     }
-
 
 
 }

@@ -7,7 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import person.louchen.restj.BaseControllerTests;
 import person.louchen.restj.model.entity.UserEntity;
-import person.louchen.restj.security.SecurityConstant;
+import person.louchen.restj.session.SessionConstant;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class UserControllerTests extends BaseControllerTests {
         String mockUserId = "1";
         MockHttpServletRequestBuilder requestBuilder = get("/users")
                 .contentType(MediaType.ALL)
-                .sessionAttr(SecurityConstant.SESSION_STORAGE_KEY, mockUserId)
+                .sessionAttr(SessionConstant.SESSION_STORAGE_KEY, mockUserId)
                 .param("name", "1");
         String responseString = mockMvc.perform(requestBuilder)
                 .andDo(print())

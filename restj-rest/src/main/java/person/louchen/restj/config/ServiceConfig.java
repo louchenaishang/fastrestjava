@@ -6,12 +6,11 @@ import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostP
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
-import person.louchen.restj.security.SecurityEntity;
-import person.louchen.restj.security.SecurityEntityManager;
+import person.louchen.restj.session.SecurityEntity;
+import person.louchen.restj.session.SecurityEntityManager;
 
 import java.util.HashMap;
 import java.util.Map;

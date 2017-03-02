@@ -20,7 +20,6 @@ import person.louchen.restj.mvc.jackson.JacksonObjectMapper;
 
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by louchen on 2017/2/13.
@@ -110,7 +109,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ThreadPoolTaskExecutor mvcTaskExecutor(){
+    public ThreadPoolTaskExecutor asyncTaskExecutor(){
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         return executor;
 
@@ -119,7 +118,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
         configurer.setDefaultTimeout(env.getProperty("spring.mvc.async.request-timeout",Long.class));
-        configurer.setTaskExecutor(mvcTaskExecutor());
+        configurer.setTaskExecutor(asyncTaskExecutor());
     }
 
 }

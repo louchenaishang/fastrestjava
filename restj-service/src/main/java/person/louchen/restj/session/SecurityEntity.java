@@ -1,8 +1,7 @@
-package person.louchen.restj.security;
+package person.louchen.restj.session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.InitializingBean;
 
 /**
  * Created by louchen on 2017/2/9.

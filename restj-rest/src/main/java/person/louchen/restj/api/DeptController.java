@@ -11,6 +11,8 @@ import person.louchen.restj.model.entity.DeptEntity;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
 
+import java.util.concurrent.Callable;
+
 /**
  * Created by louchen on 2017/2/12.
  */
@@ -27,19 +29,21 @@ public class DeptController {
      * @return
      */
     @RequestMapping(value = "", method = {RequestMethod.GET})
-    public ResultObject getUserList(String name, Integer page, Integer size) {
-        ResultObject resultObject = new ResultObject();
-        try {
-            if (page != null && size != null) {
-                resultObject.setBody(deptService.getAll(name, new PageRequest(page, size)));
-            } else {
-                resultObject.setBody(deptService.getAll(name));
+    public Callable<ResultObject> getUserList(String name, Integer page, Integer size) {
+        return () -> {
+            ResultObject resultObject = new ResultObject();
+            try {
+                if (page != null && size != null) {
+                    resultObject.setBody(deptService.getAll(name, new PageRequest(page, size)));
+                } else {
+                    resultObject.setBody(deptService.getAll(name));
+                }
+            } catch (Exception e) {
+                resultObject.setStatus(ResultStatus.ERROR);
+                resultObject.setBody(e.getMessage());
             }
-        } catch (Exception e) {
-            resultObject.setStatus(ResultStatus.ERROR);
-            resultObject.setBody(e.getMessage());
-        }
-        return resultObject;
+            return resultObject;
+        };
     }
 
     /**
@@ -48,15 +52,17 @@ public class DeptController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.GET})
-    public ResultObject getOne(String id) {
-        ResultObject resultObject = new ResultObject();
-        try {
-            resultObject.setBody(deptService.getOne(id));
-        } catch (Exception e) {
-            resultObject.setStatus(ResultStatus.ERROR);
-            resultObject.setBody(e.getMessage());
-        }
-        return resultObject;
+    public Callable<ResultObject> getOne(String id) {
+        return () -> {
+            ResultObject resultObject = new ResultObject();
+            try {
+                resultObject.setBody(deptService.getOne(id));
+            } catch (Exception e) {
+                resultObject.setStatus(ResultStatus.ERROR);
+                resultObject.setBody(e.getMessage());
+            }
+            return resultObject;
+        };
     }
 
     /**
@@ -65,15 +71,17 @@ public class DeptController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.POST})
-    public ResultObject newOne(@RequestBody DeptEntity one) {
-        ResultObject resultObject = new ResultObject();
-        try {
-            resultObject.setBody(deptService.newOne(one));
-        } catch (Exception e) {
-            resultObject.setStatus(ResultStatus.ERROR);
-            resultObject.setBody(e.getMessage());
-        }
-        return resultObject;
+    public Callable<ResultObject> newOne(@RequestBody DeptEntity one) {
+        return () -> {
+            ResultObject resultObject = new ResultObject();
+            try {
+                resultObject.setBody(deptService.newOne(one));
+            } catch (Exception e) {
+                resultObject.setStatus(ResultStatus.ERROR);
+                resultObject.setBody(e.getMessage());
+            }
+            return resultObject;
+        };
     }
 
     /**
@@ -82,15 +90,17 @@ public class DeptController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.PUT})
-    public ResultObject editOne(@RequestBody DeptEntity one) {
-        ResultObject resultObject = new ResultObject();
-        try {
-            resultObject.setBody(deptService.editOne(one));
-        } catch (Exception e) {
-            resultObject.setStatus(ResultStatus.ERROR);
-            resultObject.setBody(e.getMessage());
-        }
-        return resultObject;
+    public Callable<ResultObject> editOne(@RequestBody DeptEntity one) {
+        return () -> {
+            ResultObject resultObject = new ResultObject();
+            try {
+                resultObject.setBody(deptService.editOne(one));
+            } catch (Exception e) {
+                resultObject.setStatus(ResultStatus.ERROR);
+                resultObject.setBody(e.getMessage());
+            }
+            return resultObject;
+        };
     }
 
     /**
@@ -99,15 +109,17 @@ public class DeptController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.DELETE})
-    public ResultObject deleteOne(String id) {
-        ResultObject resultObject = new ResultObject();
-        try {
-            resultObject.setBody(deptService.deleteOne(id));
-        } catch (Exception e) {
-            resultObject.setStatus(ResultStatus.ERROR);
-            resultObject.setBody(e.getMessage());
-        }
-        return resultObject;
+    public Callable<ResultObject> deleteOne(String id) {
+        return () -> {
+            ResultObject resultObject = new ResultObject();
+            try {
+                resultObject.setBody(deptService.deleteOne(id));
+            } catch (Exception e) {
+                resultObject.setStatus(ResultStatus.ERROR);
+                resultObject.setBody(e.getMessage());
+            }
+            return resultObject;
+        };
     }
 
 }

@@ -1,4 +1,4 @@
-package person.louchen.restj.security;
+package person.louchen.restj.session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
