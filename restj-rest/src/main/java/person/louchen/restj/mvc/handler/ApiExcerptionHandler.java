@@ -32,7 +32,7 @@ public class ApiExcerptionHandler {
         ResultObject resultObject = new ResultObject();
         resultObject.setStatus(ResultStatus.ERROR);
         resultObject.setBody(ex.getLocalizedMessage());
-        return new ResponseEntity<>(resultObject, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(resultObject, HttpStatus.OK);
     }
 
     /**
