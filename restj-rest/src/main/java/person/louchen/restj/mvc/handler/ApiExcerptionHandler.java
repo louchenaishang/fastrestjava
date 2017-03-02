@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import person.louchen.restj.interfaces.exception.AuthException;
+import person.louchen.restj.interfaces.exception.SignException;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
 
@@ -19,6 +21,19 @@ import person.louchen.restj.result.ResultStatus;
 public class ApiExcerptionHandler {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    /**
+     * 身份验证失败,签名验证失败
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler({AuthException.class, SignException.class})
+    public ResponseEntity<Object> ignore(final Exception ex) {
+        ResultObject resultObject = new ResultObject();
+        resultObject.setStatus(ResultStatus.ERROR);
+        resultObject.setBody(ex.getLocalizedMessage());
+        return new ResponseEntity<>(resultObject, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
     /**
      * 异常处理

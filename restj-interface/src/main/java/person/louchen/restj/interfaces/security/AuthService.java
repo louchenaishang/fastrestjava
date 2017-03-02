@@ -1,5 +1,7 @@
 package person.louchen.restj.interfaces.security;
 
+import person.louchen.restj.interfaces.exception.AuthException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,11 +12,12 @@ public interface AuthService {
 
     /**
      * 验证请求身份在服务端是否有效
+     *
      * @param request
      * @param response
      * @return
      * @throws Exception
      */
-    boolean verify(final HttpServletRequest request, final HttpServletResponse response) throws Exception;
+    boolean verify(final HttpServletRequest request, final HttpServletResponse response) throws AuthException;
 
 }

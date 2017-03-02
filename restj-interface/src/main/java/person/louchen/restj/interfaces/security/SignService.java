@@ -1,5 +1,7 @@
 package person.louchen.restj.interfaces.security;
 
+import person.louchen.restj.interfaces.exception.SignException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,6 +18,6 @@ public interface SignService {
      * @return
      * @throws Exception
      */
-    boolean verify(final HttpServletRequest request, final HttpServletResponse response) throws Exception;
+    boolean verify(final HttpServletRequest request, final HttpServletResponse response) throws SignException;
 
 }

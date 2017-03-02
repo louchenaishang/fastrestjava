@@ -2,11 +2,11 @@ package person.louchen.restj.service.impl.security;
 
 import org.springframework.stereotype.Service;
 import person.louchen.restj.framework.utils.EmptyUtil;
+import person.louchen.restj.interfaces.exception.AuthException;
 import person.louchen.restj.interfaces.security.AuthService;
+import person.louchen.restj.service.AbstractBusinessServiceImpl;
 import person.louchen.restj.session.SessionContext;
 import person.louchen.restj.session.SessionContextHolder;
-import person.louchen.restj.service.AbstractBusinessServiceImpl;
-import person.louchen.restj.service.exception.BusinessException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 public class AuthServiceImpl extends AbstractBusinessServiceImpl implements AuthService {
 
     @Override
-    public boolean verify(final HttpServletRequest request,final HttpServletResponse response) throws Exception {
+    public boolean verify(final HttpServletRequest request,final HttpServletResponse response) throws AuthException {
         final SessionContext context = SessionContextHolder.get();
         if(context==null){
-            throw new BusinessException("身份验证失败");
+            throw new AuthException("身份验证失败");
         }
         final String userId = context.getUserId();
         if(EmptyUtil.isNotEmpty(userId)){
             return true;
         }else{
-            throw new BusinessException("身份验证失败");
+            throw new AuthException("身份验证失败");
         }
     }
 

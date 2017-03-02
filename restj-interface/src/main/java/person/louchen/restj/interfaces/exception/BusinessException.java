@@ -1,4 +1,4 @@
-package person.louchen.restj.service.exception;
+package person.louchen.restj.interfaces.exception;
 
 /**
  * Created by louchen on 2017/2/9.

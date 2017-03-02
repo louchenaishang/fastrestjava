@@ -10,7 +10,7 @@ import person.louchen.restj.model.entity.UserEntity;
 import person.louchen.restj.session.SessionContext;
 import person.louchen.restj.session.SessionContextHolder;
 import person.louchen.restj.service.AbstractBusinessServiceImpl;
-import person.louchen.restj.service.exception.BusinessException;
+import person.louchen.restj.interfaces.exception.BusinessException;
 
 import java.util.List;
 
