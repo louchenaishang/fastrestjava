@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import person.louchen.restj.interfaces.UserService;
+import person.louchen.restj.mvc.annotation.SkipAuth;
 import person.louchen.restj.param.LoginParam;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
-import person.louchen.restj.mvc.annotation.SkipAuth;
-
-import java.util.concurrent.Callable;
 
 /**
  * Created by louchen on 2017/2/9.
@@ -31,17 +29,15 @@ public class LoginController {
      */
     @RequestMapping(value = "", method = {RequestMethod.POST})
     @SkipAuth
-    public Callable<ResultObject> login(@RequestBody LoginParam loginParam) {
-        return () -> {
-            ResultObject resultObject = new ResultObject();
-            try {
-                resultObject.setBody(userService.login(loginParam.getUsername(), loginParam.getPassword()));
-            } catch (Exception e) {
-                resultObject.setStatus(ResultStatus.ERROR);
-                resultObject.setBody(e.getMessage());
-            }
-            return resultObject;
-        };
+    public ResultObject login(@RequestBody LoginParam loginParam) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.login(loginParam.getUsername(), loginParam.getPassword()));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
     }
 
 }

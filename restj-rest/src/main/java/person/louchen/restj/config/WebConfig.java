@@ -108,17 +108,4 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         super.addInterceptors(registry);
     }
 
-    @Bean
-    public ThreadPoolTaskExecutor asyncTaskExecutor(){
-        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-        return executor;
-
-    }
-
-    @Override
-    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-        configurer.setDefaultTimeout(env.getProperty("spring.mvc.async.request-timeout",Long.class));
-        configurer.setTaskExecutor(asyncTaskExecutor());
-    }
-
 }

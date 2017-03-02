@@ -3,7 +3,7 @@ spring:
   application:
     name: restj-rest
   mvc:
-    async.request-timeout: 30000
+    #async.request-timeout: 30000
     dispatch-trace-request: false
     dispatch-options-request: true
     favicon:

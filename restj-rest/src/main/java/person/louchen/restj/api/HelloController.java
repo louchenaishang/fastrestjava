@@ -14,13 +14,20 @@ import java.util.concurrent.Callable;
 @RequestMapping(value = "/hello")
 public class HelloController {
 
+//    @RequestMapping(value = "", method = {RequestMethod.GET})
+//    @SkipAuth
+//    public Callable<String> say() throws InterruptedException {
+//        return () -> {
+//            Thread.currentThread().sleep(1000);
+//            return "hello ^-^"+Thread.currentThread().getName();
+//        };
+//    }
+
     @RequestMapping(value = "", method = {RequestMethod.GET})
     @SkipAuth
-    public Callable<String> say() throws InterruptedException {
-        return () -> {
-            Thread.currentThread().sleep(1000*1);
-            return "hello ^-^"+Thread.currentThread().getName();
-        };
+    public String say() throws InterruptedException {
+        Thread.currentThread().sleep(1000);
+        return "hello ^-^"+Thread.currentThread().getName();
     }
 
 }

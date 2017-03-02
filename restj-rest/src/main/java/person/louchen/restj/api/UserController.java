@@ -10,10 +10,6 @@ import person.louchen.restj.interfaces.UserService;
 import person.louchen.restj.model.entity.UserEntity;
 import person.louchen.restj.result.ResultObject;
 import person.louchen.restj.result.ResultStatus;
-import person.louchen.restj.session.SessionContext;
-import person.louchen.restj.session.SessionContextHolder;
-
-import java.util.concurrent.Callable;
 
 /**
  * Created by louchen on 2017/2/8.
@@ -31,22 +27,19 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "", method = {RequestMethod.GET})
-    public Callable<ResultObject> getUserList(String name, Integer page, Integer size) {
-        return () -> {
-            SessionContext context = SessionContextHolder.get();
-            ResultObject resultObject = new ResultObject();
-            try {
-                if (page != null && size != null) {
-                    resultObject.setBody(userService.getAll(name, new PageRequest(page, size)));
-                } else {
-                    resultObject.setBody(userService.getAll(name));
-                }
-            } catch (Exception e) {
-                resultObject.setStatus(ResultStatus.ERROR);
-                resultObject.setBody(e.getMessage());
+    public ResultObject getUserList(String name, Integer page, Integer size) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            if (page != null && size != null) {
+                resultObject.setBody(userService.getAll(name, new PageRequest(page, size)));
+            } else {
+                resultObject.setBody(userService.getAll(name));
             }
-            return resultObject;
-        };
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
     }
 
     /**
@@ -55,17 +48,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.GET})
-    public Callable<ResultObject> getOne(String id) {
-        return () -> {
-            ResultObject resultObject = new ResultObject();
-            try {
-                resultObject.setBody(userService.getOne(id));
-            } catch (Exception e) {
-                resultObject.setStatus(ResultStatus.ERROR);
-                resultObject.setBody(e.getMessage());
-            }
-            return resultObject;
-        };
+    public ResultObject getOne(String id) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.getOne(id));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
     }
 
     /**
@@ -74,17 +65,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.POST})
-    public Callable<ResultObject> newOne(@RequestBody UserEntity one) {
-        return () -> {
-            ResultObject resultObject = new ResultObject();
-            try {
-                resultObject.setBody(userService.newOne(one));
-            } catch (Exception e) {
-                resultObject.setStatus(ResultStatus.ERROR);
-                resultObject.setBody(e.getMessage());
-            }
-            return resultObject;
-        };
+    public ResultObject newOne(@RequestBody UserEntity one) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.newOne(one));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
     }
 
     /**
@@ -93,17 +82,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.PUT})
-    public Callable<ResultObject> editOne(@RequestBody UserEntity one) {
-        return () -> {
-            ResultObject resultObject = new ResultObject();
-            try {
-                resultObject.setBody(userService.editOne(one));
-            } catch (Exception e) {
-                resultObject.setStatus(ResultStatus.ERROR);
-                resultObject.setBody(e.getMessage());
-            }
-            return resultObject;
-        };
+    public ResultObject editOne(@RequestBody UserEntity one) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.editOne(one));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
     }
 
     /**
@@ -112,17 +99,15 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/one", method = {RequestMethod.DELETE})
-    public Callable<ResultObject> deleteOne(String id) {
-        return () -> {
-            ResultObject resultObject = new ResultObject();
-            try {
-                resultObject.setBody(userService.deleteOne(id));
-            } catch (Exception e) {
-                resultObject.setStatus(ResultStatus.ERROR);
-                resultObject.setBody(e.getMessage());
-            }
-            return resultObject;
-        };
+    public ResultObject deleteOne(String id) {
+        ResultObject resultObject = new ResultObject();
+        try {
+            resultObject.setBody(userService.deleteOne(id));
+        } catch (Exception e) {
+            resultObject.setStatus(ResultStatus.ERROR);
+            resultObject.setBody(e.getMessage());
+        }
+        return resultObject;
     }
 
 }
