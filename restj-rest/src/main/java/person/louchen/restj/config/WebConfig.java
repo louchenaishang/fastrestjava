@@ -108,4 +108,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         super.addInterceptors(registry);
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/static");
+    }
+
 }

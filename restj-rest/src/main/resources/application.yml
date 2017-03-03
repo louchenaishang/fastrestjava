@@ -7,7 +7,7 @@ spring:
     dispatch-trace-request: false
     dispatch-options-request: true
     favicon:
-      enabled: false
+      enabled: true
   http:
     encoding:
       charset: UTF-8
