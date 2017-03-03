@@ -82,12 +82,19 @@ server:
   port: 8082
   context-path: /
   tomcat:
-    min-spare-threads: 1
-    max-threads: 200
+    min-spare-threads: 64
+    max-threads: 128
     uri-encoding: UTF-8
     basedir: ./
     access-log-enabled: true
     access-log-pattern: "%h %l %u %t &quot;%r&quot; %s %b"
+  undertow:
+    accesslog:
+      dir: ./
+      enabled: true
+      pattern: common
+      prefix: access_log.
+      suffix: log
   compression:
     enabled: true
     mime-types: "application/json"
